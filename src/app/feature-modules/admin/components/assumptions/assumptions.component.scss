@@ -1,0 +1,54 @@
+.row-highlight {
+  background-color: #e7e7e7;
+}
+
+.report-table-container {
+  max-height: calc(100vh - 250px);
+  width: 98vw;
+  overflow: auto;
+}
+
+.report-table {
+  width: 95vw;
+  overflow: auto;
+}
+
+.report-select {
+  width: 300px;
+  margin-left: 12px;
+}
+
+.export-button {
+  align-self: center;
+  width: 72px;
+  height: 36px;
+}
+
+.spinner {
+  align-self: center;
+  margin-left: 50px;
+}
+
+td.mat-cell:first-child {
+  /* row border */
+  border-left: 1px solid lightgray;
+}
+
+.report-buttons-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.report-buttons-inner-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.column-line-header {
+  border: 1px solid lightgray;
+
+  box-sizing: border-box;
+  padding-left: 3px;
+}

@@ -1,0 +1,24 @@
+<app-header></app-header>
+<nav mat-tab-nav-bar style="top: 30px;">
+  <!-- routerLink="/admin/users" -->
+
+  <a
+    mat-tab-link
+    routerLink="/admin/users"
+    routerLinkActive="active current"
+    [active]="usersSelected"
+    (click)="toggleToUsersView()"
+    >{{'ADMIN_TAB.USERS_TAB' | translate }}</a
+  >
+
+  <a
+    mat-tab-link
+    routerLink="/admin/system"
+    routerLinkActive="active current"
+    [active]="systemSelected"
+    (click)="toggleToSystemView()"
+    >{{'ADMIN_TAB.SYSTEM_TAB' | translate }}</a
+  >
+
+</nav>
+<router-outlet></router-outlet>

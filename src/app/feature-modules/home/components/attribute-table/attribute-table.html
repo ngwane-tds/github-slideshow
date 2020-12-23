@@ -1,0 +1,104 @@
+<div style="overflow: auto" id="scrollableDiv" #para1>
+  <table mat-table matSort [dataSource]="rows">
+    <ng-container
+      *ngFor="let field of projects.fields"
+      [matColumnDef]="field.name"
+    >
+      <th
+        mat-header-cell
+        mat-sort-header
+        class="column-line-header"
+        *matHeaderCellDef
+      >
+        {{getTranslatedColumnHeaders(field.alias)}}
+      </th>
+      <td
+        mat-cell
+        class="column-line"
+        *matCellDef="let project"
+        [ngSwitch]="field.type"
+      >
+        <ng-container *ngSwitchCase="'money'">
+          <div
+            id="{{project[field.name]}}"
+            [ngClass]="{'selectable': selectionBehaviorSubject, 'selected': (tableService.selectedProject | async) === project}"
+          >
+            {{project[field.name] | currency:'USD':'$ ':'1.0-2'}}
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'Date'">
+          <div
+            id="{{project[field.name]}}"
+            [ngClass]="{'selectable': selectionBehaviorSubject, 'selected': (tableService.selectedProject | async) === project}"
+          >
+            {{project[field.name] | date: 'short'}}
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'number'">
+          <div
+            id="{{project[field.name]}}"
+            [ngClass]="{'selectable': selectionBehaviorSubject, 'selected': (tableService.selectedProject | async) === project}"
+          >
+            <div
+              *ngIf="field.name === 'yearProjectOperational' && project[field.name] === 0"
+            >
+              Not Selected
+            </div>
+            <div
+              *ngIf="field.name === 'yearProjectOperational' && project[field.name] === -1"
+            >
+              Unknown
+            </div>
+            <div
+              *ngIf="field.name === 'yearProjectOperational' && project[field.name] !== -1 && project[field.name] !== -0"
+            >
+              {{ project[field.name] }}
+            </div>
+            <div *ngIf="field.name !== 'yearProjectOperational'">
+              {{ project[field.name] | number}}
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <div *ngIf="field.name === 'projectPhase'; else default">
+            <!-- special case as this is a nested object unlike the other attributes -->
+            {{project[field.name].value}}
+          </div>
+          <ng-template #default>
+            <div
+              id="{{project[field.name]}}"
+              *ngIf="project[field.name] !== 'NULL'"
+              [ngClass]="{'selectable': selectionBehaviorSubject, 'selected': (tableService.selectedProject | async) === project}"
+            >
+              {{project[field.name]}}
+            </div>
+          </ng-template>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayCols sticky:true"></tr>
+    <tr
+      id="{{project.id}}"
+      mat-row
+      *matRowDef="let project; columns: displayCols;"
+      class="row"
+      (click)="tableService.selectProject(project)"
+      [ngClass]="{'selectable': selectionBehaviorSubject, 'selected': (tableService.selectedProject | async) === project}"
+    ></tr>
+  </table>
+
+  <div
+    style="display: flex; justify-content: center; padding-top: 2em"
+    *ngIf="rows.data && rows.data.length === 0 && initialLoad"
+  >
+    Loading results...
+  </div>
+  <div
+    style="text-align: center; padding-top: 2em"
+    *ngIf="!this.initialLoad && (hasNoFilterResults | async)"
+  >
+    No results from filter. Clear the filter with the 'X' button or run it again
+    with different options.
+  </div>
+</div>

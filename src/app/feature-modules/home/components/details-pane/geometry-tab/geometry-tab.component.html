@@ -1,0 +1,213 @@
+<div class="gt-actions">
+
+  <div *ngIf="!(loaded | async)">
+    <mat-spinner
+        strokeWidth="3"
+        diameter="35"
+        aria-label="Loading">
+    </mat-spinner>
+  </div>
+
+  <div *ngIf="!(systemOpen | async) && !(isAdmin | async)" class="gt-row gt-system-status">
+    <span class="gt-system-msg">
+      {{
+        'GEOMETRY.SYSTEM_CLOSED' | translate
+      }}
+    </span>
+  </div>
+
+  <div *ngIf="(loaded | async) && ((systemOpen | async) || (isAdmin | async))">
+
+    <div *ngIf="!(canEdit | async) && (hasPermission | async)" class="gt-row">
+      <span>
+        {{
+          'GEOMETRY.SAVE_WARNING' | translate
+        }}
+      </span>
+    </div>
+
+    <div *ngIf="!(hasPermission | async)" class="gt-row">
+      <span>
+        {{
+          'GEOMETRY.EDIT_WARNING' | translate
+        }}
+      </span>
+    </div>
+
+    <div *ngIf="(canEdit | async) && (hasPermission | async)">
+
+      <div class="gt-row">
+
+        <div class="gt-row" *ngIf="(isUpdating | async)">
+          <button  class="gt-button" mat-raised-button color="primary" (click)="completeEdit()">
+            <mat-icon>save</mat-icon>
+            {{
+              'GEOMETRY.COMPLETE_EDIT' | translate
+            }}
+          </button>
+        </div>
+
+        <div *ngIf="(isUpdating | async) || (isCreateNew | async)" class="gt-row">
+          <button class="gt-button" mat-raised-button color="primary" (click)="cancelEdit()">
+            <mat-icon>clear</mat-icon>
+            {{
+              'GEOMETRY.CANCEL_EDIT' | translate
+            }}
+          </button>
+        </div>
+
+        <div *ngIf="!(isUpdating | async) && !(hasGeometry | async) && !(isCreateNew | async)" class="gt-row">
+          <button class="gt-button" mat-raised-button color="primary" (click)="addPointFeature()">
+            <mat-icon>trip_origin</mat-icon>
+            {{
+              'GEOMETRY.NEW_POINT' | translate
+            }}
+          </button>
+          <button style="margin-left: 8px" class="gt-button" mat-raised-button color="primary" (click)="addPolylineFeature()">
+            <mat-icon>timeline</mat-icon>
+            {{
+              'GEOMETRY.NEW_LINE' | translate
+            }}
+          </button>
+        </div>
+
+      </div>
+
+      <div class="gt-row" *ngIf="(hasGeometry | async) && !(isUpdating | async) && !(isCreateNew | async)">
+
+        <div class="gt-column">
+          <button class="gt-button" mat-raised-button color="primary" (click)="updateFeature()">
+            <ng-container [ngSwitch]="projectGeometryType">
+              <mat-icon *ngSwitchCase="'polyline'">timeline</mat-icon>
+              <mat-icon *ngSwitchCase="'point'">trip_origin</mat-icon>
+            </ng-container>
+            {{
+              'GEOMETRY.UPDATE' | translate
+            }}
+          </button>
+          <br>
+          <!--<span>{{ 'GEOMETRY.FEATURE_COUNT' | translate }}: {{sketchGraphicsLayer.graphics.length}}</span>-->
+        </div>
+
+        <div class="gt-column">
+          <button style="margin-left: 8px" class="gt-button" mat-raised-button color="primary" (click)="deleteFeature()">
+            <mat-icon>delete</mat-icon>
+            {{
+              'GEOMETRY.DELETE' | translate
+            }}
+          </button>
+          <br>
+          <!--<span>{{ 'GEOMETRY.TYPE' | translate }}: {{projectGeometryType}}</span>-->
+        </div>
+
+      </div>
+
+      <!-- Create Instructions -->
+      <div class="gt-column instructions" *ngIf="(isCreateNew | async) && !(isUpdating | async)">
+        <span>
+          <b>
+          {{
+            'GEOMETRY.INSTRUCTIONS_CREATE_TITLE' | translate
+          }}
+          </b>
+        </span>
+        <ul class="instructions-list">
+          <li>
+            <mat-icon>add</mat-icon>&nbsp;
+            <b>
+            {{
+              'GEOMETRY.INSTRUCTIONS_CREATE_MODE' | translate
+            }}</b>
+            <span class="instruction-item">
+              {{
+                'GEOMETRY.INSTRUCTIONS_CREATE_ITEM1' | translate
+              }}
+            </span>
+          </li>
+          <li>
+            <mat-icon>trip_origin</mat-icon>&nbsp;
+            <b>
+              {{
+                'GEOMETRY.INSTRUCTIONS_CREATE_POINT' | translate
+              }}
+            </b>
+            <span class="instruction-item">
+              {{
+              'GEOMETRY.INSTRUCTIONS_CREATE_ITEM2' | translate
+              }}
+            </span>
+          </li>
+          <li>
+            <mat-icon>timeline</mat-icon>&nbsp;
+            <b>
+              {{
+                'GEOMETRY.INSTRUCTIONS_CREATE_LINE' | translate
+              }}
+            </b>
+            <span class="instruction-item">
+              {{
+              'GEOMETRY.INSTRUCTIONS_CREATE_ITEM3' | translate
+              }}
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Update Instructions -->
+      <div class="gt-column" *ngIf="(isUpdating | async) && !(isCreateNew | async)">
+          <span>
+          <b>
+          {{
+            'GEOMETRY.INSTRUCTIONS_UPDATE_TITLE' | translate
+          }}
+          </b>
+        </span>
+        <ul class="instructions-list">
+          <li>
+            <mat-icon>trip_origin</mat-icon>&nbsp;
+            <b>
+              {{
+                'GEOMETRY.INSTRUCTIONS_UPDATE_POINT' | translate
+              }}
+            </b>
+            <span class="instruction-item">
+              {{
+              'GEOMETRY.INSTRUCTIONS_UPDATE_ITEM1' | translate
+              }}
+            </span>
+          </li>
+          <li>
+            <mat-icon>timeline</mat-icon>&nbsp;
+            <b>
+              {{
+                'GEOMETRY.INSTRUCTIONS_UPDATE_LINE' | translate
+              }}
+            </b>
+            <span class="instruction-item">
+              {{
+              'GEOMETRY.INSTRUCTIONS_UPDATE_ITEM2' | translate
+              }}
+            </span>
+          </li>
+          <li>
+            <mat-icon>save</mat-icon> or <mat-icon>clear</mat-icon>&nbsp;
+            <b>
+              {{
+                'GEOMETRY.INSTRUCTIONS_UPDATE_COMPLETE' | translate
+              }}
+            </b>
+            <span class="instruction-item">
+              {{
+              'GEOMETRY.INSTRUCTIONS_UPDATE_ITEM3' | translate
+              }}
+            </span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

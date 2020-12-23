@@ -1,0 +1,21 @@
+<div *ngIf="pieChartData.length" style="display: block">
+  <canvas
+    baseChart
+    width="3"
+    height="1"
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
+    [chartType]="pieChartType"
+    [options]="chartOptions"
+    [plugins]="pieChartPlugins"
+  ></canvas>
+  <!-- If custom color scheme is desired -->
+  <!--     [colors]="pieChartColors" -->
+</div>
+<mat-card
+  *ngIf="isLoading"
+  style="display: flex; justify-content: center; align-items: center"
+>
+  <mat-progress-spinner color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</mat-card>

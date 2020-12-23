@@ -1,0 +1,106 @@
+<mat-toolbar class="title-bar mat-elevation-z2">
+  <div class="logos-container">
+    <img class="logo" src="assets/BC_State_Seal_color.jpg" />
+    <img
+      class="logo"
+      src="assets/State_of_CA_seal.png"
+      alt="State of CA Seal Logo"
+    />
+  </div>
+  <h2>{{ 'NAVBAR.APP_NAME' | translate }}</h2>
+  <!-- TRANSLATE TESTING -->
+  <div class="translation-settings-container">
+    <mat-form-field class="translation-select">
+      <mat-label>
+        {{ 'NAVBAR.SELECT_LANGUAGE' | translate }}
+      </mat-label>
+      <mat-select
+        appearance="outline"
+        #langselect
+        [(value)]="selectedLanguage"
+        (selectionChange)="onLanguageSelectChange(langselect.value)"
+      >
+        <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">
+          {{ convertLanguageStrForDisplay(lang) }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- END TRANSLATE TESTING -->
+  <span class="title-bar-spacer"></span>
+
+  <div class="menu-button-container" style="display: flex">
+    <div style="margin:auto">
+      <button
+        class="menu-button"
+        (click)="navigate('home')"
+        routerLinkActive="menu-active"
+      >
+        {{ 'NAVBAR.HOME' | translate }}
+      </button>
+      <button
+        class="menu-button"
+        (click)="navigate('reports')"
+        routerLinkActive="menu-active"
+      >
+        {{ 'NAVBAR.REPORTS' | translate }}
+      </button>
+      <button
+      *ngIf="isAdmin"
+        class="menu-button"
+        (click)="navigate('dashboard')"
+        routerLinkActive="menu-active"
+      >
+        {{ 'NAVBAR.DASHBOARD' | translate }}
+      </button>
+
+      <button
+      *ngIf="isAdmin"
+        class="menu-button"
+        (click)="navigate('admin/system')"
+        routerLinkActive="menu-active"
+      >
+        {{ 'NAVBAR.ADMIN' | translate }}
+      </button>
+    </div>
+
+    <!-- <mat-menu #docMenu="matMenu" [overlapTrigger]="false">
+            <div class="doc-link">
+                <a target="_blank">
+                    <button class="menu-button" matTooltip="Download PDF" matTooltipClass="tool-tip-class">PDF Document #1</button>
+                </a>
+            </div>
+            <div class="doc-link">
+                <a target="_blank">
+                    <button class="menu-button" matTooltip="Download PDF" matTooltipClass="tool-tip-class">PDF Document #2</button>
+                </a>
+            </div>
+        </mat-menu>
+
+        <button class="menu-button" [matMenuTriggerFor]="docMenu">
+            Documents
+        </button> -->
+    <!--
+        <button *ngIf="roleService.isAdmin" class="menu-button" routerLink="/admin"
+            routerLinkActive="menu-active">Admin</button> -->
+
+    <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item (click)="logout()" >
+        {{ 'NAVBAR.LOGOUT' | translate }}
+      </button>
+    </mat-menu>
+
+    <button
+      class="user-button"
+      mat-icon-button
+      [matMenuTriggerFor]="appMenu"
+      style="margin: 0 10px; margin-right: 100px; padding-left: 7px;"
+    >
+      <mat-icon style="margin-right: 5px">account_circle</mat-icon
+      >{{ username }}
+    </button>
+  </div>
+  <div class="site-env">
+    {{ environment.name }} SITE
+  </div>
+</mat-toolbar>

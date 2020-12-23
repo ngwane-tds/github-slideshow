@@ -1,0 +1,71 @@
+<div class="report-select" *ngIf="reportOptions.length">
+  <div>
+    <mat-form-field class="report-select" floatLabel="never">
+      <mat-select
+        placeholder="Select report"
+        (selectionChange)="onReportSelect($event)"
+        [(value)]="selectedReport"
+      >
+        <mat-option *ngFor="let item of reportOptions" [value]="item.name">
+          {{ item.description }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="report-buttons-container">
+    <div class="report-buttons-inner-container">
+      <mat-spinner
+        *ngIf="loading | async"
+        strokeWidth="3"
+        diameter="35"
+        aria-label="Loading"
+        class="spinner"
+      >
+      </mat-spinner>
+    </div>
+  </div>
+
+  <div
+    *ngIf="(dataSource | async) && !(loading | async) && selectedReportData"
+    class="report-table-container"
+  >
+    <table
+      mat-table
+      matSort
+      (matSortChange)="sortChange($event)"
+      [dataSource]="(dataSource | async).attributes"
+      class="report-table"
+    >
+      <ng-container
+        *ngFor="let field of (dataSource | async).fields"
+        [matColumnDef]="field.name"
+      >
+        <th
+          mat-header-cell="{{field.alias}"
+          mat-sort-header
+          class="column-line-header"
+          *matHeaderCellDef
+        >
+          {{ field.alias }}
+        </th>
+        <td
+          mat-cell
+          class="column-line"
+          *matCellDef="let item"
+          [ngSwitch]="field.type"
+        >
+          <div *ngSwitchDefault>
+            {{ item[field.name] }}
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayCols; sticky: true"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayCols; let index = index"
+        [ngClass]="{ 'row-highlight': index % 2 != 1 }"
+      ></tr>
+    </table>
+  </div>
+  <!-- <mat-paginator [pageSizeOptions]="[15, 50, 100, 500]"></mat-paginator> -->
+</div>

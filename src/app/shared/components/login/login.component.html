@@ -1,0 +1,93 @@
+<div class="container">
+  <!-- <form
+  [formGroup]="form" -->
+  <form (submit)="login()">
+    <mat-card>
+      <mat-card-header>
+        <div class="logos-container">
+          <img class="logo" src="assets/BC_State_Seal_color.jpg" />
+          <img
+            class="logo"
+            src="assets/State_of_CA_seal.png"
+            alt="State of CA Seal Logo"
+          />
+          <span class="primary-color header-label"
+            >BMP Data Portal (Portal de datos BMP)</span
+          >
+        </div>
+      </mat-card-header>
+
+      <mat-divider class="divider"></mat-divider>
+
+      <mat-card-content>
+        <div class="title primary-color">Login (Iniciar sesión)</div>
+        <mat-form-field class="login-form-field">
+          <input
+            matInput
+            placeholder="User Name (Nombre de usuario)"
+            id="username"
+            name="username"
+            [(ngModel)]="username"
+          />
+        </mat-form-field>
+        <mat-form-field class="login-form-field">
+          <input
+            class="password-input"
+            matInput
+            placeholder="Password (Contraseña)"
+            type="password"
+            id="password"
+            name="password"
+            [type]="hidePassword ? 'password' : 'text'"
+            [(ngModel)]="password"
+          />
+          <mat-icon class="eyeball" (click)="togglePasswordVisible()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+
+        <div style="display: flex; justify-content: space-between">
+          <div class="message" *ngIf="!loading; else placeholder">
+            {{ message }}
+          </div>
+          <div class="message" *ngIf="!loading; else placeholder">
+            {{ messageSpanish }}
+          </div>
+          <ng-template #placeholder>
+            <div class="message"></div>
+          </ng-template>
+
+          <div class="button-container">
+            <mat-spinner
+              *ngIf="loading"
+              strokeWidth="2"
+              diameter="25"
+              aria-label="Loading"
+              class="spinner"
+            >
+            </mat-spinner>
+            <!--
+            <button
+              type="button"
+              [disabled]="loading"
+              mat-button
+              color="primary"
+              (click)="forgotPassword()"
+              class="forgotpassword"
+            >
+              Forgot Password?
+            </button>
+            -->
+            <button
+              type="submit"
+              [disabled]="loading"
+              mat-raised-button
+              color="primary"
+              class="signin"
+            >
+              Sign In (Registrarse)
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

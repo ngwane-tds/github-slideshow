@@ -1,0 +1,194 @@
+<div class="handle" (mousedown)="onHandleMouseDown($event)">
+  <div class="handle-line"></div>
+  <mat-slide-toggle
+    style="
+      margin-right: 4px;
+      margin-bottom: -24px;
+      transform: translate3d(0, -28px, 0);
+    "
+    [(ngModel)]="hideFilterPanel"
+    >{{'TABLE.HIDE_FILTERS' | translate }}</mat-slide-toggle
+  >
+</div>
+
+<form
+  [formGroup]="filterGroup"
+  class="filter-container"
+  *ngIf="!hideFilterPanel"
+  (keydown.enter)="$event.preventDefault()"
+>
+  <mat-form-field class="search-field">
+    <input
+      matInput
+      type="text"
+      placeholder="{{'TABLE.SEARCH' | translate }}"
+      formControlName="searchText"
+    />
+  </mat-form-field>
+
+  <div formGroupName="dropdowns" class="dropdown-filters" *ngIf="filterOptions">
+    <mat-form-field floatLabel="always" class="filter-field-small">
+      <mat-select
+        placeholder="{{ 'TABLE.USER' | translate }}"
+        formControlName="usernames"
+        multiple
+      >
+        <mat-option
+          *ngFor="let option of filterOptions.usernames;"
+          [value]="option.value"
+          >{{option.value}}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <!-- <mat-form-field floatLabel="always" class="filter-field-small">
+      <mat-select
+        placeholder="{{ 'TABLE.AGENCY' | translate }}"
+        formControlName="agencies"
+        multiple
+      >
+        <mat-option
+          *ngFor="let option of filterOptions.agencies;"
+          [value]="option.value"
+          >{{option.value}}</mat-option
+        >
+      </mat-select>
+    </mat-form-field> -->
+    <mat-form-field floatLabel="always" class="filter-field-small">
+      <mat-select
+        placeholder="{{ 'TABLE.JURISDICTION' | translate }}"
+        formControlName="jurisdictions"
+        multiple
+      >
+        <mat-option
+          *ngFor="let option of filterOptions.jurisdictions;"
+          [value]="option.value"
+          >{{option.value}}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field floatLabel="always" class="filter-field-small">
+      <mat-select
+        placeholder="{{ 'TABLE.PROJECT_PHASE' | translate }}"
+        formControlName="projectPhases"
+        multiple
+      >
+        <mat-option
+          *ngFor="let option of filterOptions.projectPhases;"
+          [value]="option.value"
+          >{{option.value}}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always" class="filter-field-small">
+      <mat-select
+        placeholder="{{ 'TABLE.PROJECT_TYPE' | translate }}"
+        formControlName="projectTypes"
+        multiple
+      >
+        <mat-option
+          *ngFor="let option of filterOptions.projectTypes;"
+          [value]="option.value"
+          >{{option.value}}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field floatLabel="always" class="filter-field-small">
+      <mat-select
+        placeholder="{{ 'TABLE.STATUS' | translate }}"
+        formControlName="statuses"
+        multiple
+      >
+        <mat-option
+          *ngFor="let option of filterOptions.statuses;"
+          [value]="option.value"
+          >{{option.value}}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field floatLabel="always" class="filter-field-small">
+      <mat-select
+        placeholder="{{ 'TABLE.POE_SERVED' | translate }}"
+        formControlName="poeLocations"
+        multiple
+      >
+        <mat-option
+          *ngFor="let option of filterOptions.poeLocations;"
+          [value]="option.value"
+          >{{option.value}}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field floatLabel="always" class="filter-field-small">
+      <mat-select
+        placeholder="{{ 'TABLE.TERM_SELECTION' | translate }}"
+        formControlName="termSelections"
+        multiple
+      >
+        <mat-option
+          *ngFor="let option of filterOptions.termSelections;"
+          [value]="option"
+          >{{option}}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filter-button-container">
+    <button
+      class="filter-button"
+      mat-button
+      matTooltip="{{ 'TABLE.APPLY_FILTER.tooltip' | translate }}"
+      matTooltipClass="tool-tip-class"
+      (click)="filter()"
+    >
+      <mat-label>{{ 'TABLE.APPLY_FILTER.label' | translate }} </mat-label>
+    </button>
+    <button
+      class="filter-button"
+      mat-button
+      matTooltip="{{'TABLE.CLEAR_FILTER.tooltip' | translate }}"
+      matTooltipClass="tool-tip-class"
+      (click)="clearFilter()"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+    <!-- <button
+      class="filter-button"
+      mat-button
+      matTooltip="Export"
+      matTooltipClass="tool-tip-class"
+      (click)="export()"
+    >
+      <mat-icon>save_alt</mat-icon>
+    </button> -->
+    <mat-slide-toggle class="custom-font" formControlName="andIsChecked"
+      >{{'TABLE.MATCH_ALL_FILTERS' | translate }}</mat-slide-toggle
+    >
+    <div *ngIf="projects.attributes" class="custom-font result-count">
+      {{'TABLE.RESULT_COUNT' | translate }} : {{projects.attributes.length}}
+    </div>
+  </div>
+  <div style="float: right">
+    <button
+      *ngIf="(hasTableSelection | async)"
+      class="clear-button"
+      mat-raised-button
+      color="primary"
+      matTooltip="{{'TABLE.CLEAR_TABLE_SELECTION.tooltip' | translate }}"
+      matTooltipClass="tool-tip-class"
+      (click)="clearTableSelection()"
+    >
+      <mat-icon>clear</mat-icon>
+      {{'TABLE.CLEAR_TABLE_SELECTION.label' | translate }}
+    </button>
+  </div>
+</form>
+
+<mat-divider></mat-divider>
+
+<attribute-table
+  style="max-height: calc(100% - 48px)"
+  [projectsResult]="projects$ | async"
+  (sortChange)="sortChange($event)"
+></attribute-table>

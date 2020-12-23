@@ -1,0 +1,68 @@
+@import "src/theme";
+
+.dph{
+  height: 120px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.dph-status-draft{
+  background-color: rgba(255, 0, 0, 0.7);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 10px;
+}
+
+.dph-status-in-prog{
+  background-color: rgba(223, 93, 54, 0.54);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 10px;
+}
+
+.dph-status-in-prog-es{
+  background-color: rgba(223, 93, 54, 0.54);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 10px;
+}
+
+.dph-status-submitted{
+  background-color: green;
+  color: white;
+  padding: 3px 6px;
+  border-radius: 10px;
+}
+
+.dph-status-submitted-es{
+  background-color: green;
+  color: white;
+  padding: 3px 6px;
+  border-radius: 10px;
+}
+
+.dph-system-status{
+  text-align: center;
+}
+
+.dph-system-msg{
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 10px;
+  font-size: large;
+}
+
+.dph-row{
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.dph-actions{
+  display: flex;
+  margin-top: 16px;
+}
+
+.dph-button{
+  background-color: $primary-color !important;
+}

@@ -1,0 +1,37 @@
+<app-header></app-header>
+<app-map [@map]="mode | async" class="map"></app-map>
+
+<div id="fabMotionContainer" class="fab-motion-container">
+  <div
+    style="height: 100%; width: 794px; max-width: calc(95vw - 14px)"
+    [@fab]="mode | async"
+  >
+    <button
+      *ngIf="(isMapViewReady && systemOpen) || isProjectSelected"
+      mat-mini-fab
+      color="primary"
+      (click)="fabClick()"
+      [matTooltip]="iconToolTip(isProjectSelected)"
+      matTooltipClass="tool-tip-class"
+      tabindex="-1"
+    >
+      <mat-icon>
+        {{ fabIcon(isProjectSelected) }}
+      </mat-icon>
+    </button>
+  </div>
+</div>
+
+<table-pane
+  id="tablePane"
+  class="mat-elevation-z4"
+  [@tablePane]="mode | async"
+  [projectsResult]="projects$ | async"
+  [filterOptions]="filterOptions$ | async"
+></table-pane>
+
+<details-pane
+  class="mat-elevation-z4"
+  [@detailsPane]="mode | async"
+  (toggleMode)="toggleMode()"
+></details-pane>

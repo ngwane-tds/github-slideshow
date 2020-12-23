@@ -1,0 +1,19 @@
+<div *ngIf="data.length && labels.length" style="display: block">
+  <canvas
+    baseChart
+    width="3"
+    height="1"
+    [datasets]="data"
+    [labels]="labels"
+    [chartType]="pieChartType"
+    [options]="chartOptions"
+  ></canvas>
+</div>
+
+<mat-card
+  *ngIf="isLoading"
+  style="display: flex; justify-content: center; align-items: center"
+>
+  <mat-progress-spinner color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</mat-card>

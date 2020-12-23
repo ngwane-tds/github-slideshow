@@ -1,0 +1,6 @@
+<div class="system-container">
+  <mat-slide-toggle class="custom-font" [checked]="isSystemOpen"
+  [(ngModel)]="isSystemOpen"
+  (change)="systemOpenToggle()"
+      >{{'ADMIN_TAB.TOGGLE_SYSTEM_OPEN' | translate }}</mat-slide-toggle>
+</div>

@@ -1,0 +1,25 @@
+@import 'src/theme';
+::ng-deep .mat-form-field .mat-input-element {
+  color: #101010;
+}
+::ng-deep .mat-form-field .mat-form-field-label {
+  color: #101010 !important;
+}
+::ng-deep .mat-form-field .mat-form-field-underline {
+  background-color: #101010;
+}
+::ng-deep .mat-form-field .mat-form-field-ripple {
+  background-color: #101010;
+}
+::ng-deep .mat-form-field .mat-form-field-required-marker {
+  color: #101010;
+}
+
+::ng-deep .mat-tooltip {
+  background-color: #4e5a65;
+  font-size: 14px;
+}
+
+.calc-scroll {
+  height: calc(100vh - 200px); // substract height of header
+}

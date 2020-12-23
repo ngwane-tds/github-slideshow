@@ -1,0 +1,20 @@
+<div class="error-dialog-titlebar mat-elevation-hairline">
+
+  <div class="error-dialog-title">{{data.title}}</div>
+  <div style="flex-grow:1"></div>
+</div>
+
+<div class="error-dialog-body-container" style="flex: 1;">
+
+  <div class="error-dialog-content mat-dialog-content" style="flex: 1;">
+    <span>{{data.message}}</span>
+    <div [innerHTML]="htmlMessage"></div>
+  </div>
+
+  <ng-container *ngIf="showActionButtons">
+    <mat-dialog-actions>
+        <button mat-raised-button class="error-button" color="primary" (click)="dialogRef.close()">Ok</button>
+    </mat-dialog-actions>
+  </ng-container>
+
+</div>

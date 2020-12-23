@@ -1,0 +1,176 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$margin-xs: 4px;
+$margin-small: 8px;
+$margin-standard: 12px;
+$margin-medium: 16px;
+$margin-large: 24px;
+
+$font-family: Roboto, "Helvetica Neue", sans-serif;
+$font-size-medium: 0.85em;
+$font-size-large: 1.2em;
+$font-size-small: 0.8em;
+$font-size-xs: 0.68em;
+
+$border-radius-standard: 6px;
+
+$primary-color: #df5d36;
+$primary-color-light: #f2beae;
+$primary-color-semi: #e57d5e;
+$accent-color: #f9d448;
+$table-alt-bkrd-color: #e7e7e7;
+$menu-active-color: #f9d448;
+$warn-color: #b71c1c;
+
+// FORMS
+.full-width-mat-field {
+  width: 100%;
+}
+.half-width-mat-field {
+  width: calc(50% - 4px);
+}
+
+.mat-content {
+  color: $primary-color;
+  font-size: 20px;
+}
+
+h5 {
+  color: $primary-color;
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: $primary-color !important;
+}
+
+.table-alt-bkrd-color {
+  background-color: $table-alt-bkrd-color;
+}
+
+.menu-active {
+  box-shadow: 0 0 4px 2px $menu-active-color;
+  color: $primary-color;
+}
+
+.admin-menu-active {
+  color: #fff;
+  background-color: $accent-color;
+  border-bottom: 1px solid $primary-color;
+}
+
+.primary-color {
+  color: $primary-color !important;
+}
+
+.accent-background {
+  background-color: $accent-color !important;
+}
+
+.snack-bar-success {
+  background-color: $primary-color;
+}
+
+.snack-bar-error {
+  background-color: $warn-color;
+}
+
+.row.selectable {
+  cursor: pointer;
+}
+
+.row.selectable:hover {
+  background-color: $accent-color;
+}
+
+.dialog-toolbar {
+  background-color: $accent-color !important;
+  height: 40px !important;
+}
+
+.row.selected {
+  background: $primary-color;
+}
+
+.row.selected mat-cell {
+  color: white;
+}
+
+.mat-expansion-panel-header {
+  border-top: $primary-color 1px solid;
+}
+
+.button-delete {
+  background-color: $warn-color !important;
+}
+
+/* Primary palette (using http://mcg.mbitson.com) ********************/
+$md-mcgpalette-primary: (
+  50: #e0edf3,
+  100: #b3d1e0,
+  200: #80b3cc,
+  300: #4d94b8,
+  400: #267da8,
+  500: #006699,
+  600: #005e91,
+  700: #005386,
+  800: #00497c,
+  900: #00386b,
+  A100: #9ac6ff,
+  A200: #67aaff,
+  A400: #348dff,
+  A700: #1a7fff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+
+$go-triangle-primary: mat-palette($md-mcgpalette-primary);
+$go-triangle-accent: mat-palette($mat-light-green);
+
+$go-triangle-theme: mat-light-theme($go-triangle-primary, $go-triangle-accent);
+
+@mixin mix-app-theme($go-triangle-theme) {
+  $primary: map-get($go-triangle-theme, primary);
+  $accent: map-get($go-triangle-theme, accent);
+}
+
+@include angular-material-theme($go-triangle-theme);
+
+::ng-deep {
+  .mat-form-field .mat-input-element {
+      color: #101010;
+  }
+  .mat-form-field .mat-form-field-label {
+      color: #101010!important;
+  }
+  .mat-form-field .mat-form-field-underline {
+      background-color: #101010;
+  }
+  .mat-form-field .mat-form-field-ripple {
+      background-color: #101010;
+  }
+  .mat-form-field .mat-form-field-required-marker {
+      color: #101010;
+  }
+}
+
+
+.mat-tooltip {
+    background-color: #4e5a65;
+    font-size: 12px;
+}

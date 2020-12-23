@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SANDAG BMP Data Portal</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.16/esri/css/main.css"
+    />
+  </head>
+  <body>
+    <!-- <script src="node_modules/chart.js/src/chart.js"></script> -->
+
+    <div style="margin: 100px auto; width: 500px" id="incompatible-browser">
+      Internet Explorer is no longer supported, please try another browser.
+    </div>
+    <script>
+      function GetIEVersion() {
+        var sAgent = window.navigator.userAgent;
+        var Idx = sAgent.indexOf('MSIE');
+        // If IE, return version number.
+        if (Idx > 0)
+          return parseInt(sAgent.substring(Idx + 5, sAgent.indexOf('.', Idx)));
+        // If IE 11 then look for Updated user agent string.
+        else if (!!navigator.userAgent.match(/Trident\/7\./)) return 11;
+        else return 0; //It is not IE
+      }
+
+      var x = document.getElementById('incompatible-browser');
+      if (GetIEVersion() === 0) x.style = 'display:none;';
+      //is not IE
+      else {
+      } //is IE
+    </script>
+    <app-root></app-root>
+  </body>
+</html>

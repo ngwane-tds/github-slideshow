@@ -1,0 +1,56 @@
+@import 'src/theme';
+
+.gt-button{
+  background-color: $primary-color !important;
+}
+
+.gt-row {
+  margin: $margin-small;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.gt-system-status{
+  text-align: center;
+}
+
+.gt-system-msg{
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 10px;
+  font-size: large;
+}
+
+.gt-column {
+  margin: $margin-small;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.instructions{
+  margin: $margin-standard;
+}
+
+.instructions-list{
+  list-style-type:none;
+  font-size: $font-size-medium;
+}
+
+.instruction-item {
+  margin-left: $margin-small;
+}
+
+.instructions-list li{
+  margin: $margin-small 0;
+}
+
+.action-buttons{
+  align-content: center;
+  margin: auto;
+}
+
+

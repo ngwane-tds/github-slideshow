@@ -1,0 +1,63 @@
+:host
+  height: 100vh
+  width: 100vw
+  display: block
+  overflow: hidden
+
+table-pane
+  width: 100vw
+  height: 30vh
+  position: absolute
+  bottom: 0
+  z-index: 200
+
+details-pane
+  width: 42vw
+  height: 100vh
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 400
+
+fab
+  position: absolute
+
+.fab-motion-container
+  position: absolute
+  top: 80px
+  z-index: 999
+  pointer-events: none
+
+.mat-mini-fab
+  pointer-events: initial
+  background: #DF5D36
+
+.map
+  //position: absolute
+  //top: 90px
+  //left: 0px
+  position: relative
+  top: 30px
+  width: 100vw
+  height: calc(70vh - 90px)
+  z-index: 0
+
+// .home-spinner
+//   position: fixed
+//   height: 2em
+//   width: 2em
+//   overflow: show
+//   margin: auto
+//   top: 0
+//   left: 0
+//   bottom: 0
+//   right: 0
+//   z-index:1000
+
+
+.loading-overlay
+  position: fixed
+  width: 100vw
+  height: 100vh
+  z-index:1000
+  background-color: rgba(0,0,0,0.3)

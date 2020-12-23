@@ -1,0 +1,86 @@
+@import 'src/theme';
+
+.title-bar {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  font-size: 18px;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: #fff;
+}
+
+.logos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 16px;
+}
+
+.logo {
+  height: 75px;
+  padding: 0px 8px;
+}
+
+.translation-settings-container {
+  display: flex;
+  margin-left: 24px;
+  align-items: center;
+}
+
+.translation-select {
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.title-bar-spacer {
+  flex: 1 1 auto;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 3px 20px;
+  cursor: pointer;
+  border-radius: $border-radius-standard;
+}
+
+.user-button:hover{
+  background: $primary-color-light;
+}
+
+.menu-button:hover {
+  background: $primary-color-light;
+}
+
+.menu-button-selected {
+  background: $primary-color-semi;
+}
+
+.site-env{
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+mat-toolbar > h5 {
+  font-size: 0.8em;
+  margin-top: 17px;
+  margin-left: 10px;
+}
+
+.doc-link:hover {
+  background-color: lightblue;
+}
+
+:host {
+  display: inline-block;
+  height: 56px;
+}

@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.mat-row:nth-child(even).selected {
+  background: #df5d36;
+}
+
+.row:hover {
+  background: #f9d448;
+}
+
+.selected {
+  color: white;
+  background: #df5d36;
+}
+
+.selected:hover {
+  background: #df5d36;
+}
+
+th {
+  border-top: 1px solid lightgray;
+}

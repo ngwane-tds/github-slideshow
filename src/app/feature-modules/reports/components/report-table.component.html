@@ -1,0 +1,168 @@
+<div *ngIf="translatedJSON" class="report-select-container">
+  <div class="report-container">
+    <div class="report-container">
+      <mat-form-field class="report-select" floatLabel="never">
+        <mat-select
+          placeholder="{{ translatedJSON.SELECT_REPORT }}"
+          [ngModel]="selectedReport.ENDPOINT_NAME"
+          (ngModelChange)="onSelectedReportChange($event)"
+        >
+          <mat-option
+            matTooltip="{{ item.DESCRIPTION }}"
+            matTooltipPosition="before"
+            matTooltipDisabled="{{ item.DESCRIPTION.length < 25 }}"
+            *ngFor="let item of translatedJSON.EXPORT_OPTIONS"
+            [value]="item.ENDPOINT_NAME"
+          >
+            {{ item.DESCRIPTION }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="report-container">
+        <form
+          class="report-container"
+          *ngIf="filterGroup"
+          [formGroup]="filterGroup"
+          (keydown.enter)="$event.preventDefault()"
+        >
+          <!-- <mat-form-field class="search-input">
+            <input
+              matInput
+              type="text"
+              placeholder="Search"
+              formControlName="searchText"
+            />
+          </mat-form-field> -->
+
+          <!-- <div formGroupName="dropdowns" class="dropdown-filters">
+            <mat-form-field floatLabel="always" class="filter-field-small">
+              <mat-select
+                placeholder="District"
+                formControlName="district"
+                multiple
+              >
+                <mat-option
+                  *ngFor="let option of filterOptions.dropdowns.district"
+                  [value]="option"
+                  >{{ option.district }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field
+              floatLabel="always"
+              class="filter-field-small"
+              *ngIf="filterOptions.dropdowns.year"
+            >
+              <mat-select
+                placeholder="Fiscal Year"
+                formControlName="year"
+                multiple
+              >
+                <mat-option
+                  *ngFor="let option of filterOptions.dropdowns.year"
+                  [value]="option"
+                  >{{ option.fiscal_year }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div> -->
+        </form>
+        <div class="report-container">
+          <!-- <button
+            class="apply-filter-button"
+            mat-button
+            matTooltip="Filter list"
+            matTooltipClass="tool-tip-class"
+            (click)="filter()"
+          >
+            Apply Filters
+          </button> -->
+          <!-- <button
+            class="filter-button"
+            mat-button
+            matTooltip="Clear filters"
+            (click)="clearFilter()"
+            matTooltipClass="tool-tip-class"
+          >
+            <mat-icon>clear</mat-icon>
+          </button> -->
+
+          <button
+            class="export-button"
+            mat-raised-button
+            (click)="export()"
+            color="primary"
+            matTooltip="Export data"
+            matTooltipClass="tool-tip-class"
+            [disabled]="!selectedReport.ENDPOINT_NAME"
+          >
+            {{ translatedJSON.EXPORT_BUTTON }}
+          </button>
+
+          <mat-spinner
+            *ngIf="loading | async"
+            strokeWidth="3"
+            diameter="35"
+            aria-label="Loading"
+            class="spinner"
+          >
+          </mat-spinner>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <mat-paginator
+    [ngClass]="selectedReport ? 'show-paginator' : 'hide-paginator'"
+    [length]="(dataSource | async).attributes.length"
+    [pageSize]="100"
+    [pageSizeOptions]="[10, 50, 100, 500]"
+  ></mat-paginator>
+
+  <ng-container
+    *ngIf="(dataSource | async) && !(loading | async) && selectedReportData"
+  >
+    <table
+      mat-table
+      matSort
+      (matSortChange)="sortChange($event)"
+      [dataSource]="rows"
+      class="report-table"
+    >
+      <ng-container
+        *ngFor="let field of (dataSource | async).fields"
+        [matColumnDef]="field.name"
+      >
+        <th
+          mat-header-cell="{{field.alias}"
+          mat-sort-header
+          class="column-line-header"
+          *matHeaderCellDef
+        >
+          {{ field.alias }}
+        </th>
+        <td
+          mat-cell
+          class="column-line"
+          *matCellDef="let item"
+          [ngSwitch]="field.type"
+        >
+          <ng-container *ngSwitchCase="'money'">
+            <div>
+              {{ item[field.name] | currency: 'USD':'$ ':'1.0-2' }}
+            </div>
+          </ng-container>
+          <div *ngSwitchDefault>
+            {{ item[field.name] }}
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayCols; sticky: true"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayCols; let index = index"
+        [ngClass]="{ 'row-highlight': index % 2 != 1 }"
+      ></tr>
+    </table>
+  </ng-container> -->
+</div>

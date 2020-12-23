@@ -1,0 +1,180 @@
+<p style="margin-left: 24px; margin-top: 60px">Users are currently managed via manual API calls.  TO DO -> build UI for user management.</p>
+<!-- <div class="admin-outer-container">
+  <mat-spinner
+    *ngIf="loading | async"
+    strokeWidth="5"
+    diameter="100"
+    aria-label="Loading"
+    class="spinner"
+  ></mat-spinner>
+
+  <div *ngIf="!(loading | async)" class="inner-container">
+    <div [@tablePane]="mode | async">
+      <div class="user-add-button">
+        <button mat-raised-button (click)="addUser()" color="primary">
+          Add User
+        </button>
+      </div>
+
+      <div class="table-vertical-scroll">
+        <table mat-table [dataSource]="users | async" class="table-full-width">
+          <ng-container matColumnDef="FirstName">
+            <th mat-header-cell *matHeaderCellDef>First name</th>
+            <td mat-cell *matCellDef="let user">{{ user.FirstName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="LastName">
+            <th mat-header-cell *matHeaderCellDef>Last name</th>
+            <td mat-cell *matCellDef="let user">{{ user.LastName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="UserName">
+            <th mat-header-cell *matHeaderCellDef>UserName</th>
+            <td mat-cell *matCellDef="let user">{{ user.UserName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="Role">
+            <th mat-header-cell *matHeaderCellDef>Role</th>
+            <td mat-cell *matCellDef="let user">{{ user.Roles[0].Name }}</td>
+          </ng-container>
+          <ng-container matColumnDef="EmailConfirmed">
+            <th mat-header-cell *matHeaderCellDef>Email Confirmed?</th>
+            <td mat-cell *matCellDef="let user">
+              {{ user.EmailConfirmed ? 'Yes' : 'No' }}
+            </td>
+          </ng-container>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            class="row selectable"
+            (click)="editUser(row)"
+          ></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="editUser" [@editPane]="mode | async">
+      <form [formGroup]="userForm">
+        <mat-card>
+          <div class="card-header user-card-header">
+            <span class="card-title">{{ editTitle }}</span>
+            <div class="button-container">
+              <span
+                ><mat-spinner
+                  *ngIf="processing | async"
+                  strokeWidth="2"
+                  diameter="25"
+                  aria-label="Processing"
+                  class="spinner-processing"
+                ></mat-spinner
+              ></span>
+              <button
+                *ngIf="editTitle == 'Edit user'"
+                [disabled]="processing | async"
+                class="button-reset"
+                mat-raised-button
+                (click)="resetPassword(userForm.value)"
+              >
+                Reset password
+              </button>
+              <button
+                [disabled]="processing | async"
+                class="button-cancel"
+                mat-raised-button
+                (click)="cancelEdit()"
+              >
+                Cancel
+              </button>
+              <button
+                [disabled]="processing | async"
+                *ngIf="editTitle == 'Edit user'"
+                class="button-delete"
+                mat-raised-button
+                color="warn"
+                (click)="delete(userForm.value)"
+              >
+                Delete
+              </button>
+              <button
+                class="button-save"
+                [disabled]="!userForm.valid || (processing | async)"
+                mat-raised-button
+                color="primary"
+                type="submit"
+                (click)="save(userForm.value)"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <div class="form-group">
+              <mat-label>First Name:</mat-label>
+              <mat-form-field floatLabel="never">
+                <input
+                  placeholder=""
+                  matInput
+                  formControlName="FirstName"
+                  autocomplete="off"
+                />
+              </mat-form-field>
+              <label class="label-required">*</label>
+            </div>
+            <div class="form-group">
+              <mat-label>Last Name:</mat-label>
+              <mat-form-field floatLabel="never">
+                <input
+                  placeholder=""
+                  matInput
+                  formControlName="LastName"
+                  autocomplete="off"
+                />
+              </mat-form-field>
+              <label class="label-required">*</label>
+            </div>
+            <div class="form-group">
+              <mat-label>Email:</mat-label>
+              <mat-form-field floatLabel="never">
+                <input
+                  placeholder=""
+                  matInput
+                  formControlName="Email"
+                  type="email"
+                  autocomplete="off"
+                />
+              </mat-form-field>
+              <label class="label-required">*</label>
+            </div>
+            <div class="form-group">
+              <mat-label>Phone:</mat-label>
+              <mat-form-field floatLabel="never">
+                <input
+                  placeholder=""
+                  matInput
+                  formControlName="PhoneNumber"
+                  autocomplete="off"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-label>User Role:</mat-label>
+              <mat-form-field floatLabel="never">
+                <mat-select placeholder="Select role" formControlName="Role">
+                  <mat-option *ngFor="let item of roles" [value]="item.RoleId">
+                    {{ item.Name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <label class="label-required">*</label>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <div class="error">
+          {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->

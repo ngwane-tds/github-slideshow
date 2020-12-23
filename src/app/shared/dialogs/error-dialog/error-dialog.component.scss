@@ -1,0 +1,44 @@
+@import 'src/theme';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.error-button{
+  background-color: $primary-color !important;
+  color: white !important;
+}
+
+.error-dialog-titlebar {
+    height: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 4px 4px;
+    background-color: red;
+}
+
+.error-dialog-title {
+    font-size: 18px;
+    padding-left: 12px;
+    font-weight: 500;
+    color: white;
+}
+
+.error-dialog-body-container {
+    padding: $margin-small;
+    margin: $margin-small;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.error-dialog-content{
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}

@@ -1,0 +1,12 @@
+{
+  "productName": "SANDAG BMP",
+  "s3Options": {
+    "accessKeyId": "AKIA32WAO5P5VTNZDYNN",
+    "secretAccessKey": "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"
+  },
+  "buckets": {
+    "Dev": "sandag-bmp-dev",
+    "prod": "sandag-bmp-prod",
+    "qa": "sandag-bmp-qa"
+  }
+}

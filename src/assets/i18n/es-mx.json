@@ -1,0 +1,523 @@
+{
+  "ADMIN_TAB": {
+    "USERS_TAB": "Usuarios",
+    "SYSTEM_TAB": "Sistema",
+    "TOGGLE_SYSTEM_OPEN": "Abierto a la aportación y presentación de proyectos"
+  },
+  "REPORTS_TAB": {
+    "SELECT_REPORT": "Seleccione un tipo de proyecto",
+    "EXPORT_OPTIONS": [
+      {
+        "ENDPOINT_NAME": "ROADWAY",
+        "DESCRIPTION": "Camino (Vialidad)"
+      },
+      {
+        "ENDPOINT_NAME": "INTERCHANGE",
+        "DESCRIPTION": "Intersección"
+      },
+      {
+        "ENDPOINT_NAME": "RAILROAD",
+        "DESCRIPTION": "Ferroviario"
+      },
+      {
+        "ENDPOINT_NAME": "PORT_OF_ENTRY",
+        "DESCRIPTION": "Garita"
+      },
+      {
+        "ENDPOINT_NAME": "CROSS_BORDER",
+        "DESCRIPTION": "Modo de transporte no-motorizado"
+      },
+      {
+        "ENDPOINT_NAME": "SHORT_TERM",
+        "DESCRIPTION": "Inversiones menores de capital y operativas a corto plazo"
+      }
+    ],
+    "EXPORT_BUTTON": "Exportar"
+  },
+  "NAVBAR": {
+    "SELECT_LANGUAGE": "Seleccione el idioma",
+    "APP_NAME": "Portal de datos BMP",
+    "HOME": "Casa",
+    "REPORTS": "Informes",
+    "DASHBOARD": "Tablero",
+    "ADMIN": "Administración",
+    "LOGOUT": "Cerrar sesión"
+  },
+  "TABS": {
+    "PROJECT_DETAILS": "Detalles del proyecto",
+    "GEOMETRY": "Geometría"
+  },
+  "DETAILS": {
+    "PROJECT_NUMBER": "Numero del proyecto",
+    "PROJECT_STATUS": "Estado del proyecto",
+    "CREATED_BY": "Creado por",
+    "SAVE": "Guardar",
+    "DELETE_PROJECT": "Borrar proyecto",
+    "ZOOM_TO": "Acercar",
+    "SUBMIT_PROJECT": "Enviar proyecto",
+    "SYSTEM_CLOSED": "Sistema cerrado para la entrada de datos"
+  },
+  "MAP": {
+    "BASEMAP": "Mapa base",
+    "REF": "Dato de referencia",
+    "LEGEND": "Leyenda"
+  },
+  "GEOMETRY": {
+    "SYSTEM_CLOSED": "No puede editar la geometría",
+    "SAVE_WARNING": "No puede agregar geometría hasta que primero guarde los detalles básicos del proyecto.",
+    "EDIT_WARNING": "No tiene permiso para editar la geometría de este proyecto.",
+    "CANCEL_EDIT": "Cancelar",
+    "COMPLETE_EDIT": "Salvar",
+    "NEW_POINT": "Nueva geometría de puntos",
+    "NEW_LINE": "Nueva geometría de línea",
+    "UPDATE": "Actualizar geometría",
+    "DELETE": "Borrar geometría",
+    "FEATURE_COUNT": "Recuento de funciones",
+    "TYPE": "Tipo de geometría",
+    "INSTRUCTIONS_CREATE_TITLE": "Crear instrucciones de funciones",
+    "INSTRUCTIONS_UPDATE_TITLE": "Actualizar las instrucciones de la función",
+    "INSTRUCTIONS_CREATE_MODE": "Modo de creación:",
+    "INSTRUCTIONS_CREATE_ITEM1": "El cursor del mouse se mostrará como una 'cruz' en el mapa.",
+    "INSTRUCTIONS_CREATE_POINT": "Crear punto:",
+    "INSTRUCTIONS_CREATE_ITEM2": "'Haga clic' en una ubicación en el mapa.",
+    "INSTRUCTIONS_CREATE_LINE": "Crear línea:",
+    "INSTRUCTIONS_CREATE_ITEM3": "Haga 'un solo clic' en una ubicación en el mapa para crear un vértice, 'haga doble clic' para completar la línea.",
+    "INSTRUCTIONS_UPDATE_POINT": "Punto de actualización:",
+    "INSTRUCTIONS_UPDATE_ITEM1": "Su punto será resaltado en azul.  Haz un solo clic en el punto y mantén el botón del ratón pulsado.  Puedes arrastrar el punto a una nueva ubicación y soltar el botón del ratón.",
+    "INSTRUCTIONS_UPDATE_LINE": "Línea de actualización:",
+    "INSTRUCTIONS_UPDATE_ITEM2": "Su línea será resaltada en azul.  Verás una serie de 'vértices' (puntos) a lo largo de la línea.  Puedes hacer clic en un vértice para seleccionarlo.  Una vez seleccionado, puedes arrastrar el vértice a una nueva ubicación.",
+    "INSTRUCTIONS_UPDATE_COMPLETE": "Actualización completa:",
+    "INSTRUCTIONS_UPDATE_ITEM3": "Haz clic en 'Guardar' para completar la edición o en 'Cancelar' para descartar los cambios."
+  },
+  "TABLE": {
+    "SEARCH": "Buscar",
+    "MATCH_ALL_FILTERS": "Coincidir con todos los filtros",
+    "RESULT_COUNT": "Recuento de resultados",
+    "HIDE_FILTERS": "Esconder filtros",
+    "ITEMS_PER_PAGE": "Artículos por página",
+    "OF": "de",
+    "PROJECT_NUMBER": "Número de Proyecto",
+    "PROJECT_NAME": "Nombre del Proyecto",
+    "PROJECT_DESCRIPTION": "Descripción del Proyecto",
+    "PROJECT_TYPE": "Tipo de Proyecto",
+    "POE_SERVED": "Garita de Entrada",
+    "PROJECT_PHASE": "Fase del Proyecto",
+    "STATUS": "Estado",
+    "JURISDICTION": "Jurisdicción",
+    "CREATED_DATE": "Fecha de creación",
+    "TOTAL_PROJECT_COST": "Costo Total del Proyecto",
+    "YEAR_PROJECT_OPERATIONAL": "Año Proyecto Operativo",
+    "TERM_SELECTION": "Periodo de Tiempo",
+    "AGENCY": "Agencia",
+    "USER": "Usuario",
+    "APPLY_FILTER": {
+      "label": "Aplicar filtro",
+      "tooltip": "Filtrar"
+    },
+    "CLEAR_FILTER": {
+      "label": "",
+      "tooltip": "Borrar filtro"
+    },
+    "CLEAR_TABLE_SELECTION": {
+      "label": "Selección clara",
+      "tooltip": "Selección de la mesa de compensación"
+    }
+  },
+  "PROJECT_DATA_ENTRY": {
+    "REQUIRED": "es requerido",
+    "VALIDATION_ERROR": {
+      "PROJECT_TYPE_GENERAL": "Se requiere el tipo de proyecto.",
+      "JURISDICTION": "Se requiere jurisdicción."
+    },
+    "PROJECT_TYPES": {
+      "ROADWAY": {
+        "label": "Camino (Vialidad)",
+        "tooltip": "Proyectos de obras viales por jurisdicción"
+      },
+      "INTERCHANGE": {
+        "label": "Intersección",
+        "tooltip": "Proyectos de intercambio (intersecciones) por jurisdicción"
+      },
+      "RAIL": {
+        "label": "Ferroviario",
+        "tooltip": "Los proyectos ferroviarios incluyen separaciones de elevación ferroviaria y proyectos de transporte público agilizado ya sea de tren ligero o autobús"
+      },
+      "POE": {
+        "label": "Garita",
+        "tooltip": "Proyectos de garitas de cruce fronterizo"
+      },
+      "CPMF": {
+        "label": "Modo de transporte no-motorizado",
+        "tooltip": "Por proyecto de transporte no-motorizado se entiende aquellos proyectos de infraestructura peatonal o ciclista. Dichos proyectos se catalogarán para referencia, mas no se priorizarán."
+      },
+      "SHORT_TERM": {
+        "label": "Inversiones menores de capital y operativas a corto plazo",
+        "tooltip": "Los proyectos de inversiones menores de capital y operativas a corto plazo se refieren a proyectos cuya intención es facilitar el despacho de peatones y vehículos en las garitas, de tal forma que se agiliza el flujo de bienes y personas. Proyectos de inversiones menores de capital son aquellas mejoras en infraestructura que tienen un costo monetario relativamente bajo y pudieran ser proyectos independientes o estar vinculados con alguna mejora operativa. Las características que distinguen a estos proyectos son. <<ADD ADDITIONAL INFO>>"
+      }
+    },
+    "FIELD_NAMES": {
+      "SHARED": {
+        "PROJECT_TYPE_GENERAL": {
+          "label": "Tipo de Proyecto",
+          "tooltip": "Por favor seleccione el tipo de proyecto"
+        },
+        "JURISDICTION": {
+          "label": "Jurisdicción",
+          "tooltip": "Por favor proporcione la ubicación del proyecto (condado o municipio)."
+        },
+        "PERSON_NAME": {
+          "label": "Nombre del personal completando los datos",
+          "tooltip": "Nombre y apellido"
+        },
+        "PROJECT_NAME": {
+          "label": "Nombre del Proyecto",
+          "tooltip": "Por favor proporcione el nombre del proyecto."
+        },
+        "PROJECT_DESCRIPTION": {
+          "label": "Descripción del Proyecto",
+          "tooltip": "Por favor proporcione una breve descripción del proyecto."
+        },
+        "PORT_OF_ENTRY_LOCATION": {
+          "label": "Ubicación del Proyecto",
+          "tooltip": "Por favor seleccione la ubicación de garita."
+        },
+        "PORT_OF_ENTRY_LOCATION_OTHER": {
+          "label": "Otra ubicación",
+          "tooltip": "Por favor describe la ubicación."
+        },
+        "TOTAL_PROJECT_COST": {
+          "label": "Costo del Proyecto (2015 $MXN)",
+          "tooltip": "Por favor proporcione el costo del proyecto en pesos mexicanos 2015."
+        },
+        "PROJECT_FULLY_FUNDED": {
+          "label": "¿Proyecto completamente financiado?",
+          "tooltip": "Por favor, especifique si el proyecto está totalmente financiado."
+        },
+        "FUNDS_STILL_NEEDED": {
+          "label": "Fondos Necesarios para Terminar el Proyecto (2015 $MXN)",
+          "tooltip": "Algunos proyectos serán financiados parcialmente; otros no tendrán financiamiento. Si el proyecto está totalmente financiado, responda n/a. De lo contrario, por favor proporcione los fondos necesarios para terminar el proyecto en pesos mexicanos 2015."
+        },
+        "ENVIRONMENTAL_BENEFIT": {
+          "label": "Beneficios Ambientales",
+          "tooltip": "Por favor seleccione una respuesta del menú desplegable. Se le pide al Grupo Técnico de Trabajo que revise los planes existentes y los documentos ambientales para determinar si el beneficio ambiental del proyecto es 'alto,' 'medio,' o 'bajo'. El Grupo Técnico de Trabajo debe considerar factores tales como calidad de aire, mitigación ambiental etc."
+        },
+        "ECONOMIC_BENEFIT": {
+          "label": "Beneficios Comunitarios y Económicos",
+          "tooltip": "Por favor utilice el menú desplegable para seleccionar su respuesta. Se le pide al Grupo Técnico de Trabajo que revise la información existente de los planes y documentos de ingeniería para determinar si los beneficios comunitarios y económicos del proyecto son 'altos,' 'medios,' o 'bajos'. El Grupo Técnico de Trabajo debe considerar factores tales como seguridad, movilidad, accesibilidad, desarrollo económico, creación de empleos y producción, etc. "
+        },
+        "POE_PRIMARILY_SERVED": {
+          "label": "Garita de Entrada a la que el Proyecto da Servicio ",
+          "tooltip": "Utilice el menú desplegable para seleccionar la Garita principal a la que el proyecto da servicio. Solo seleccione una Garita."
+        },
+        "HOW_PROJECT_SERVES_POE": {
+          "label": "¿Cómo proporciona servicio a la Garita de Entrada?",
+          "tooltip": "Por favor explique cómo el proyecto da servicio a una Garita."
+        },
+        "VEHICLE_TYPE": {
+          "label": "Tipo de Vehículo que Principalmente Sirve",
+          "tooltip": "Por favor, especifique si el proyecto sirve principalmente a vehículos comerciales, vehículos de pasajeros o vehículos comerciales y de pasajeros."
+        },
+        "LIMITS_OF_PROJECT_MAIN": {
+          "label": "Límites del Proyecto",
+          "tooltip": "Por favor proporcione los límites del proyecto incluyendo “de” y “a”, y el punto de partida y el punto final del proyecto (milla o km.)."
+        },
+        "LIMITS_OF_PROJECT_FROM": {
+          "label": "Límites del Proyecto (de)",
+          "tooltip": ""
+        },
+        "LIMITS_OF_PROJECT_TO": {
+          "label": "Límites del Proyecto (a)",
+          "tooltip": ""
+        },
+        "BEGIN_POST": {
+          "label": "Punto de partida (milla o km)",
+          "tooltip": ""
+        },
+        "END_POST": {
+          "label": "Punto final (milla o km)",
+          "tooltip": ""
+        },
+        "MULTIMODAL_BICYCLE": {
+          "label": "Beneficios Multimodales—Bicicleta / Micromovilida",
+          "tooltip": "Utilice el menú desplegable para seleccionar “si” o “no” para cada modo de transporte que incluye el proyecto: carriles para bicicletas (u otro tipo de micromovilidad). En los Estados Unidos, se anticipa que la mayoría de los proyectos de caminos arteriales acomodarían peatones y tráfico de bicicleta en 2040."
+        },
+        "MULTIMODAL_PEDESTRIAN": {
+          "label": "Beneficios Multimodales--Peatones",
+          "tooltip": "Utilice el menú desplegable para seleccionar “si” o “no” si el el proyecto incluye vías peatonales. En los Estados Unidos, se anticipa que la mayoría de los proyectos de caminos arteriales acomodarían peatones y tráfico de bicicleta en 2040."
+        },
+        "MULTIMODAL_HOV": {
+          "label": "Beneficios Multimodales—VAO / Tránsito",
+          "tooltip": "Utilice el menú desplegable para seleccionar “si” o “no” si el proyecto incluye carriles para Vehículos de Alta Ocupación (VAO) o carriles de tránsito."
+        },
+        "TERMINUS_FACILITY": {
+          "label": "¿Ocurre el proyecto en una 'Instalación Terminal' o conecta con un 'Instalación terminal'?",
+          "tooltip": "Utilice el menú desplegable para seleccionar su respuesta. Seleccione ocurre en una “Instalación Terminal” si el proyecto está en un segmento que tiene leal final una Garita (se llama “instalación terminal”). Seleccione “conecta con una Instalación Terminal” si el proyecto no termina en una Garita de Entrada pero conecta con una Instalación Terminal. Seleccione ninguno si ninguna situación aplica al proyecto."
+        },
+        "YEAR_PROJECT_OPERATIONAL": {
+          "label": "Año en que el proyecto comenzará a operar",
+          "tooltip": "Los proyectos deben ser terminados entre 2020 y 2040."
+        }
+      },
+      "POE": {
+        "POE_PROJECT_TYPE": {
+          "label": "Tipo de proyecto de Garita",
+          "tooltip": "Utilice el menú desplegable para seleccionar tipo de Garita, por ejemplo, garita para pasajero actual, garita comercial actual, nueva garita para pasajeros y comercial etc. No proporcione más de un tipo de proyecto."
+        },
+        "PROJECT_PHASE": {
+          "label": "Fase Actual del Proyecto",
+          "tooltip": "La fase actual del proyecto se describe como “Planeación Conceptual” o “Planificación Avanzada (Planes y Especificaciones)”, o “Permiso Presidencial” *PLANEACIÓN CONCEPTUAL: Estudio de Viabilidad de GSA, Proyecto Conceptual de INDAABIN *PLANIFICACIÓN AVANZADA (PLANES Y ESPECIFICACIONES): Documentos Ambientales (CEQA/NEPA), Prospecto para el diseño del sitio y financiamiento de GSA, Estudio del Desarrollo del Programa de GSA, Planes Arquitectónicos y Especificaciones de GSA, Plan Maestro de INDAABIN *PROYECTO EJECUTIVO: Solicitud para el Permiso Presidencial, Prospecto para construcción de GSA, Proyecto Ejecutivo de INDAABIN, Aprobación de la Comisión Intersecretarial de México, Permiso Presidencia de México "
+        },
+        "EXISTING_CONDITION": {
+          "label": "Condiciones Existentes",
+          "tooltip": "Por favor describa las condiciones existentes, incluyendo el número actual de carriles dirección sur y el tipo de carril."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condición después de la terminación del proyecto",
+          "tooltip": "Por favor describa la condición después de la mejora, incluyendo el número de carriles en dirección sur y el tipo de carril."
+        },
+        "POE_PASSENGER_HOURS_MAIN": {
+          "label": "Garita para Pasajeros:  Horas de Operación (2040)",
+          "tooltip": "Por favor seleccione las horas de operación planeadas (por ejemplo 0700 - 2200) para lunes-viernes, sábado y domingo."
+        },
+        "POE_PASSENGER_HOURS_MF_START": {
+          "label": "Lunes a Viernes desde...",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_MF_END": {
+          "label": "Lunes a Viernes hasta...",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_SA_START": {
+          "label": "Sábado desde...",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_SA_END": {
+          "label": "Sábado hasta...",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_SU_START": {
+          "label": "Domingo desde...",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_SU_END": {
+          "label": "Domingo hasta...",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_MAIN": {
+          "label": "Garita Comercial: Horas de Operación (2040)",
+          "tooltip": "Por favor proporcione las horas de operación planeadas (por ejemplo 0700-2200) para lunes-viernes, sábado y domingo."
+        },
+        "POE_COMMERCIAL_HOURS_MF_START": {
+          "label": "Lunes a Viernes desde...",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_MF_END": {
+          "label": "Lunes a Viernes hasta...",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_SA_START": {
+          "label": "Sábado desde...",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_SA_END": {
+          "label": "Sábado hasta...",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_SU_START": {
+          "label": "Domingo desde...",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_SU_END": {
+          "label": "Domingo hasta...",
+          "tooltip": ""
+        },
+        "POSITIVE_IMPACT_PASSENGER": {
+          "label": "Impacto positivo a otros modos de cruces de pasajeros",
+          "tooltip": "Utilice el menú desplegable para seleccionar su respuesta. ¿El proyecto POE afecta positivamente a otros modos de cruce de pasajeros: carriles de vehículos de pasajeros, carriles de autobús, o carriles peatonales? Un “impacto positivo” significa que se prevé que el proyecto reduzca la demanda en otro modo o modos de transporte."
+        },
+        "POSITIVE_IMPACT_CARGO": {
+          "label": "Impacto positivo a otros modos de cruces de cargas",
+          "tooltip": "Utilice el menú desplegable para seleccionar su respuesta. ¿El proyecto POE impacta positivamente en otros modos de cruce de carga: carriles, carriles regulares de camiones o carriles de camiones especial como FAST en los EE.UU.?"
+        },
+        "CONSTRUCTION_PHASE": {
+          "label": "Fase de Construcción",
+          "tooltip": "¿Estará en construcción el proyecto a corto plazo, es decir, antes del 31 de diciembre de 2024?"
+        }
+      },
+      "RAIL": {
+        "PROJECT_PHASE": {
+          "label": "Fase Actual del Proyecto",
+          "tooltip": "La fase actual del proyecto se describe como “diseño final” o “planificación avanzada/ingeniería preliminar/medioambiental” o “Planeación Conceptual.” *DISEÑO FINAL (PROYECTO EJECUTIVO): Incluye actividades de construcción preliminar como el desarrollo de planes y especificaciones, y otro trabajo de ingeniería para que el proyecto esté listo para construcción y pueda entrar en acuerdo para financiamiento completo. Proyectos en esta fase deben tener un documento ambiental aprobado. *PLANIFICACIÓN AVANZADA/INGENIERÍA PRELIMINAR/MEDIOAMBIENTAL (PLAN MAESTRO): Incluye proyectos que están en la fase de Reporte del Estudio de Proyecto (PSR, por sus siglas en inglés), llevándose a cabo ingeniería preliminar, incluyendo el diseño geométrico de proyectos específicos, o la preparación de los documentos ambientales. *PLANEACIÓN CONCEPTUAL (ESQUEMA CONCEPTUAL): Incluye aquellos proyectos que están en proceso de estudios de factibilidad incluyendo el desarrollo de costos y análisis de alternativas."
+        },
+        "EXISTING_CONDITION": {
+          "label": "Condición Existente",
+          "tooltip": "Describa la condición existente."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condición después de la terminación del proyecto",
+          "tooltip": "Describa la condición después de la mejora del proyecto."
+        },
+        "FREIGHT_PROJECT_ANNUAL_TOTAL": {
+          "label": "Proyectos Ferroviarios de Carga: Número Total Anual Actual de Vagones de Carga (2015)",
+          "tooltip": "Por favor teclee su respuesta. Por favor proporcione un valor para el número total anual de vagones de ferrocarril de carga. Por favor, no utilice rangos. Como el número actual de vagones de carga para 2015 no estará disponible para nuevos proyectos de ferrocarriles, utilice cero “0” para el numero de vagones de carga."
+        },
+        "FREIGHT_PROJECT_PROJECTED_TOTAL": {
+          "label": "Proyectos Ferroviarios de Carga: Número Total Anual Proyectado de Coches de Carga (2040)",
+          "tooltip": "Por favor teclee su respuesta para el número anual proyectado de coches de carga 2040. Por favor, no utilice rangos."
+        },
+        "PASSENGER_PROJECT_ANNUAL_TOTAL": {
+          "label": "Proyectos Pasajeros – Número Total Anual Actual de Pasajeros (2015)",
+          "tooltip": "Por favor teclee su respuesta. Por favor proporcione un valor para el número de pasajeros. Por favor, no utilice rangos.  Como el número actual de pasajeros no estará disponible para nuevos proyectos de ferrocarriles, utilice cero “0” para el número de pasajeros."
+        },
+        "PASSENGER_PROJECT_PROJECTED_TOTAL": {
+          "label": "Proyectos Pasajeros – Número Total Anual Proyectado de Pasajeros (2040)",
+          "tooltip": "Por favor teclee su respuesta para el número anual proyectado de pasajeros. Por favor, no utilice rangos."
+        },
+        "GRADE_SEPARATION": {
+          "label": "Paso de Desnivel",
+          "tooltip": "Utilice el menú desplegable para seleccionar “si” o “no” para indicar si el proyecto incluirá un paso a desnivel para aliviar el congestionamiento."
+        },
+        "RAIL_TERMINUS_TYPE": {
+          "label": "¿Está en una vía férrea que tiene leal final una Garita de Entrada o conecta con una vía férrea que tiene leal final una Garita de Entrada?",
+          "tooltip": "Utilice el menú desplegable para seleccionar su respuesta. Seleccione  “Tiene una terminal en la Garita” si el proyecto está en un segmento que tiene leal final una Garita. Seleccione “Conecta con una vía férrea que tiene leal final una Garita” si el proyecto no termina en una Garita pero conecta con una instalación terminal. Seleccione ninguno si ninguna situación aplica al proyecto."
+        }
+      },
+      "INTERCHANGE": {
+        "PROJECT_PHASE": {
+          "label": "Fase Actual del Proyecto",
+          "tooltip": "La fase actual del proyecto se describe como “diseño final” o “planificación avanzada/ingeniería preliminar/medioambiental” o “Planeación Conceptual.” *DISEÑO FINAL (PROYECTO EJECUTIVO): Incluye actividades de construcción preliminar como el desarrollo de planes y especificaciones, así como la estimación de cantidades que llevan a la preparación de paquetes de licitación. *PLANIFICACIÓN AVANZADA/INGENIERÍA PRELIMINAR/MEDIOAMBIENTAL (PLAN MAESTRO): Incluye proyectos que están en la fase de Reporte del Estudio de Proyecto (PSR, por sus siglas en inglés), llevándose a cabo ingeniería preliminar, incluyendo el diseño geométrico de proyectos específicos, o la preparación de los documentos ambientales. *PLANEACIÓN CONCEPTUAL (ESQUEMA CONCEPTUAL): Incluye aquellos proyectos que están en proceso de estudios de factibilidad."
+        },
+        "EXISTING_CONDITION": {
+          "label": "Condición Existente de la rampa—número de carriles (2015)",
+          "tooltip": "Por favor describa el número actual de carriles al lado de la rampa."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condición después de la terminación del proyecto—número de carriles",
+          "tooltip": "Por favor describa el número planeado de carriles al lado de la rampa. "
+        },
+        "RAMP": {
+          "label": "Dirección de la Rampa",
+          "tooltip": "Por favor proporcione la dirección de la rampa."
+        },
+        "NAME_NEAREST_INTERCHANGE": {
+          "label": "Si Nueva, Nombre de la intersección más cercana",
+          "tooltip": "Para las intersecciones nuevas, proporcione los datos de 2015 de la intersección más cercana. Incluya el nombre de la intersección más cercana y utilice los datos para esta instalación cuando sea necesario."
+        },
+        "ANNUAL_DAILY_TRAFFIC": {
+          "label": "AADT Antes del Proyecto (2015)",
+          "tooltip": "Por favor teclee su respuesta para AADT antes del Proyecto (2015). Por favor, no utilice rangos. Como el AADT para 2015 no estará disponible para intersecciones nuevas, utilice cero “0” para AADT 2015.  (No utilice la intersección más cercana)."
+        },
+        "FUTURE_ANNUAL_DAILY_TRAFFIC": {
+          "label": "AADT Después del Proyecto (2040)",
+          "tooltip": "Por favor teclee su respuesta para AADT planeado para 2040. Por favor, no utilice rangos."
+        },
+        "TRUCK_PERCENT_SHARE_AADT": {
+          "label": "Porción del por ciento de AADT que es camiones de carga antes del proyecto (2015)",
+          "tooltip": "Por favor proporcione la porción del porcentaje de AADT que corresponda a camiones. Como la porción del porcentaje de AADT que corresponde a camiones de carga en las intersecciones nuevas no estará disponible, utilice la porción del porcentaje de AADT que correspondió a camiones en 2015 para la intersección más cercana."
+        },
+        "ACCIDENT_RATE": {
+          "label": "Tasa actual (2015) de Accidentes: Por Debajo o Por Arriba del promedio en todo el estado o en toda la ciudad para una instalación similar",
+          "tooltip": "Por favor seleccione una respuesta del menú desplegable. Como la tasa de accidentes en 2015 no estará disponible para intersecciones nuevas, utilice la intersección más cercana para determinar si la taza es por debajo o por arriba del promedio en todo el Estado o en toda la ciudad."
+        }
+      },
+      "ROADWAY": {
+        "PROJECT_PHASE": {
+          "label": "Fase Actual del Proyecto",
+          "tooltip": "La fase actual del proyecto se describe como “diseño final” o “planificación avanzada/ingeniería preliminar/medioambiental” o “Planeación Conceptual.” *DISEÑO FINAL (PROYECTO EJECUTIVO): Incluye actividades de construcción preliminar como el desarrollo de planes y especificaciones, así como la estimación de cantidades que llevan a la preparación de paquetes de licitación. *PLANIFICACIÓN AVANZADA/INGENIERÍA PRELIMINAR/MEDIOAMBIENTAL (PLAN MAESTRO): Incluye proyectos que están en la fase de Reporte del Estudio de Proyecto (PSR, por sus siglas en inglés), llevándose a cabo ingeniería preliminar, incluyendo el diseño geométrico de proyectos específicos, o la preparación de los documentos ambientales. *PLANEACIÓN CONCEPTUAL (ESQUEMA CONCEPTUAL): Incluye aquellos proyectos que están en proceso de estudios de factibilidad."
+        },
+        "EXISTING_CONDITION": {
+          "label": "Condición Existente",
+          "tooltip": "Por favor describa el número actual de carriles y el tipo de instalación (autopista, carretera, arteria o vía colectora)."
+        },
+        "CURRENT_LANES": {
+          "label": "Número actual de carriles",
+          "tooltip": ""
+        },
+        "CURRENT_FACILITY": {
+          "label": "Tipo de instalación",
+          "tooltip": ""
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condición después de la terminación del proyecto",
+          "tooltip": "Por favor describa el número de carriles y el tipo de instalación después de la terminación del proyecto."
+        },
+        "FUTURE_LANES": {
+          "label": "Número de carriles en el futuro",
+          "tooltip": ""
+        },
+        "FUTURE_FACILITY": {
+          "label": "Tipo de instalación en el futuro",
+          "tooltip": ""
+        },
+        "NAME_PARALLEL_FACILITY": {
+          "label": "Si Nuevo, Nombre de la Instalación Paralela",
+          "tooltip": "Para los caminos nuevos, proporcione los datos de 2015 de la instalación paralela. Incluya la instalación paralela y utilice los datos para esta instalación cuando sea necesario."
+        },
+        "ANNUAL_DAILY_TRAFFIC": {
+          "label": "AADT Antes del Proyecto (2015)",
+          "tooltip": "Por favor teclee su respuesta para AADT (Tráfico Promedio Diario Anual) . Por favor, no utilice rangos. Como el AADT para 2015 no estará disponible para caminos nuevos, utilice cero “0” para AADT 2015 (No utilice una instalación paralela)."
+        },
+        "FUTURE_ANNUAL_DAILY_TRAFFIC": {
+          "label": "AADT Después del Proyecto (2040)",
+          "tooltip": "Por favor teclee su respuesta para AADT (Tráfico Promedio Diario Anual) planeado para 2040. Por favor, no utilice rangos."
+        },
+        "TRUCK_PERCENT_SHARE_AADT": {
+          "label": "Porción del porcentaje de AADT que es camiones de carga antes del proyecto (2015)",
+          "tooltip": "Por favor proporcione la porción del porcentaje de AADT (Tráfico Promedio Diario Anual) que corresponda a camiones de carga. Como la porción del porcentaje de AADT que corresponde a camiones de carga en los caminos nuevos no estará disponible, utilice la porción del porcentaje de AADT que correspondió a camiones de carga en 2015 en una instalación similar."
+        },
+        "ACCIDENT_RATE": {
+          "label": "Tasa actual (2015) de Accidentes: Por Debajo o Por Arriba del promedio en todo el estado o en toda la ciudad para una instalación similar",
+          "tooltip": "Por favor seleccione una respuesta del menú desplegable. Como la tasa de accidentes en 2015 no estará disponible para caminos nuevos, utilice una instalación similar para determinar si la taza es por debajo o por arriba del promedio en todo el Estado o en toda la ciudad."
+        }
+      },
+      "CROSSBORDER": {
+        "PROJECT_TYPE": {
+          "label": "Tipo de Proyecto",
+          "tooltip": "Seleccione “bicicleta” o “peatonal” o “otro tipo de micromovilidad” como scooters, mopeds, e-bikes, e-scooters and other rideables."
+        },
+        "PROJECT_PHASE": {
+          "label": "Fase Actual del Proyecto",
+          "tooltip": "La fase actual del proyecto se describe como “diseño final” o “planificación avanzada/ingeniería preliminar/medioambiental” o “Planeación Conceptual.” *DISEÑO FINAL (PROYECTO EJECUTIVO): Incluye actividades de construcción preliminar como el desarrollo de planes y especificaciones, así como la estimación de cantidades que llevan a la preparación de paquetes de licitación. *PLANIFICACIÓN AVANZADA/INGENIERÍA PRELIMINAR/MEDIOAMBIENTAL (PLAN MAESTRO): Incluye proyectos que están en la fase de Reporte del Estudio de Proyecto (PSR, por sus siglas en inglés), llevándose a cabo ingeniería preliminar, incluyendo el diseño geométrico de proyectos específicos, o la preparación de los documentos ambientales. *PLANEACIÓN CONCEPTUAL (ESQUEMA CONCEPTUAL): Incluye aquellos proyectos que están en proceso de estudios de factibilidad."
+        },
+        "EXISTING_CONDITION": {
+          "label": "Condiciones Existentes",
+          "tooltip": "Por favor describala condición existente."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condición después de la terminación del proyecto",
+          "tooltip": "Por favor describa la condición después de la mejora del proyecto."
+        }
+      },
+      "SHORT_TERM": {
+        "SHORT_TERM_PROJECT_LOCATION": {
+          "label": "Ubicación del Proyecto",
+          "tooltip": "Por favor proporcione la ubicación del proyecto (garita o ciudad)"
+        },
+        "HOW_REDUCE_BORDER_WAIT": {
+          "label": "Explicación de la Manera en que el Proyecto Podría Reducir los Tiempos de Espera",
+          "tooltip": "Favor de explicar la manera en que el proyecto reduciría los tiempos de espera en los cruces fronterizos."
+        },
+        "YEAR_PROJECT_OPERATIONAL": {
+          "label": "Año en que el proyecto comenzará a operar",
+          "tooltip": "Todo proyecto deberá planearse para su finalización a corto plazo (2020-2024). Seleccione un año en el corto plazo."
+        },
+        "PROJECT_PHASE": {
+          "label": "Fase Actual del Proyecto",
+          "tooltip": "La fase actual del proyecto se describe como “proyecto ejecutivo” o “planificación avanzada/ingeniería preliminar/medioambiental” o “Planeación Conceptual.” *DISEÑO FINAL (PROYECTO EJECUTIVO): Incluye actividades de construcción preliminar como el desarrollo de planes y especificaciones, así como la estimación de cantidades que llevan a la preparación de paquetes de licitación. *PLANIFICACIÓN AVANZADA/INGENIERÍA PRELIMINAR/MEDIOAMBIENTAL (PLAN MAESTRO): Incluye proyectos que están en la fase de Reporte del Estudio de Proyecto (PSR, por sus siglas en inglés), llevándose a cabo ingeniería preliminar, incluyendo el diseño geométrico de proyectos específicos, o la preparación de los documentos ambientales. *PLANEACIÓN CONCEPTUAL (ESQUEMA CONCEPTUAL): Incluye aquellos proyectos que están en proceso de estudios de factibilidad. *IDEA: Incluye aquellos proyectos que constituyen ideas innovadoras para reducir los tiempos de espera en los cruces fronterizos, pero que no forman parte de ningún documento de planeación."
+        },
+        "EXISTING_CONDITION": {
+          "label": "Condiciones Existentes",
+          "tooltip": "Por favor describala condición existente."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condición después de la terminación del proyecto",
+          "tooltip": "Por favor describa la condición después de la mejora del proyecto."
+        },
+        "TOTAL_PROJECT_COST": {
+          "label": "Costo del Proyecto (2015 $MXD)",
+          "tooltip": "Por favor proporcione el costo del proyecto en 2015 dólares estadounidenses. Utilice el conversor monetario, si es necesario."
+        }
+      }
+    }
+  }
+}

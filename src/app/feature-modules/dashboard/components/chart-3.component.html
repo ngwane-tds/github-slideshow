@@ -1,0 +1,19 @@
+<div>
+  <canvas
+    baseChart
+    width="5"
+    height="1"
+    [data]="chart3Data"
+    [labels]="chart3Labels"
+    [chartType]="chart3Type"
+    [options]="chart3Options"
+  ></canvas>
+  >
+</div>
+<mat-card
+  *ngIf="isLoading"
+  style="display: flex; justify-content: center; align-items: center"
+>
+  <mat-progress-spinner color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</mat-card>

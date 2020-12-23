@@ -1,0 +1,23 @@
+<div class="confirm-dialog-titlebar mat-elevation-hairline">
+
+  <div class="confirm-dialog-title">{{data.title}}</div>
+  <div style="flex-grow:1"></div>
+    <!--<button mat-icon-button (click)="dialogRef.close()" tabindex="-1"><mat-icon>close</mat-icon></button>-->
+</div>
+
+<div class="confirm-dialog-body-container">
+
+  <div class="confirm-dialog-content mat-dialog-content" style="flex: 1;">
+    <span>{{data.message}}</span>
+    <div [innerHTML]="htmlMessage"></div>
+  </div>
+
+  <mat-dialog-actions>
+
+  <div mat-dialog-actions>
+      <button mat-raised-button class="confirm-button" color="primary" (click)="confirm()">Yes</button>
+      <button mat-raised-button class="confirm-button" color="primary" (click)="cancel()">No</button>
+  </div>
+  </mat-dialog-actions>
+
+</div>

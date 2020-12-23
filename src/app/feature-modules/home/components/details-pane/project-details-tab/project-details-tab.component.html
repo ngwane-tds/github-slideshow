@@ -1,0 +1,3439 @@
+<ng-container *ngIf="isProcessing | async">
+  <mat-spinner
+    strokeWidth="5"
+    diameter="40"
+    aria-label="Loading"
+    class="spinner"
+  ></mat-spinner>
+</ng-container>
+
+<div class="calc-scroll" *ngIf="!(isProcessing | async)">
+  <ng-container *ngIf="lookupValues">
+    <form formGroup [formGroup]="projectTypeFields">
+      <mat-form-field class="full-width-mat-field">
+        <mat-label
+          >{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_TYPE_GENERAL.label'
+              | translate
+          }}
+        </mat-label>
+        <mat-select
+          required
+          #projectTypeSelection
+          placeholder="Project Type"
+          formControlName="projectTypeId"
+          (selectionChange)="onProjTypeSelectionChange($event.value)"
+        >
+          <mat-option
+            *ngFor="let projectType of projectTypes"
+            [value]="projectType.id"
+          >
+            {{ projectType.value }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="projectTypeFields.get('projectTypeId').hasError('required')"
+        >
+          {{
+            'PROJECT_DATA_ENTRY.VALIDATION_ERROR.PROJECT_TYPE_GENERAL'
+              | translate
+          }}
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <!-- SHARED FORM FIELDS -->
+    <form
+      *ngIf="projectPhaseOptions.length"
+      formGroup
+      [formGroup]="sharedFormFields"
+    >
+      <ng-container>
+        <ng-container>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+            matTooltip="{{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.JURISDICTION.tooltip'
+                | translate
+            }}"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.JURISDICTION.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select
+              required
+              formControlName="jurisdictionId"
+              #jurisdictionIdSelect
+            >
+              <mat-option
+                *ngFor="let item of lookupValues.JURISDICTION"
+                [value]="item.id"
+              >
+                {{ item.value }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="jurisdictionIdSelect.errorState"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.JURISDICTION.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            class="half-width-mat-field"
+            matTooltip="{{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PERSON_NAME.tooltip'
+                | translate
+            }}"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PERSON_NAME.label'
+                  | translate
+              }}
+            </mat-label>
+            <input required matInput formControlName="personName" />
+            <mat-error
+              *ngIf="sharedFormFields.get('personName').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PERSON_NAME.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            class="full-width-mat-field"
+            matTooltip="{{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_NAME.tooltip'
+                | translate
+            }}"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_NAME.label'
+                  | translate
+              }}
+            </mat-label>
+            <input required matInput formControlName="projectName" />
+            <mat-error
+              *ngIf="sharedFormFields.get('projectName').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_NAME.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            class="full-width-mat-field"
+            matTooltip="{{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_DESCRIPTION.tooltip'
+                | translate
+            }}"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_DESCRIPTION.label'
+                  | translate
+              }}
+            </mat-label>
+            <textarea
+              required
+              matInput
+              formControlName="projectDescription"
+            ></textarea>
+            <mat-error
+              *ngIf="
+                sharedFormFields.get('projectDescription').hasError('required')
+              "
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_DESCRIPTION.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+      </ng-container>
+    </form>
+
+    <mat-divider
+      *ngIf="projectTypeSelection.value"
+      style="margin: 24px 0px"
+    ></mat-divider>
+
+    <!-- FORM FIELDS UNIQUE TO INDIVIDUAL PROJECT TYPES -->
+    <div [ngSwitch]="projectTypeFields.controls.projectTypeString.value">
+      <!-- POE -->
+      <form
+        formGroup
+        [formGroup]="portOfEntryFields"
+        *ngSwitchCase="'PROJECT_DATA_ENTRY.PROJECT_TYPES.POE.label' | translate"
+      >
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PROJECT_TYPE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PROJECT_TYPE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Select a Port of Entry Project Type"
+            formControlName="portOfEntryProjectTypeId"
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.PORT_OF_ENTRY_PROJECT_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PORT_OF_ENTRY_LOCATION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PORT_OF_ENTRY_LOCATION.label'
+                | translate
+            }}
+          </mat-label>
+
+          <mat-select
+            placeholder="Select a Location"
+            formControlName="portOfEntryLocationId"
+            required
+            #portOfEntryLocationIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.PORT_OF_ENTRY_LOCATION"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="portOfEntryLocationIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PORT_OF_ENTRY_LOCATION.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.EXISTING_CONDITION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.EXISTING_CONDITION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea matInput formControlName="existingCondition"></textarea>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.CONDITION_PROJECT_COMPLETION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.CONDITION_PROJECT_COMPLETION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea
+            matInput
+            required
+            formControlName="conditionProjectCompletion"
+          ></textarea>
+          <mat-error
+          *ngIf="portOfEntryFields.get('conditionProjectCompletion').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.CONDITION_PROJECT_COMPLETION.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <ng-container>
+          <h4
+            matTooltip="{{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PASSENGER_HOURS_MAIN.tooltip'
+                | translate
+            }}"
+          >
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PASSENGER_HOURS_MAIN.label'
+                | translate
+            }}
+          </h4>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PASSENGER_HOURS_MF_START.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="passengerHoursWeekStart">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PASSENGER_HOURS_MF_END.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="passengerHoursWeekEnd">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PASSENGER_HOURS_SA_START.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="passengerHoursSatStart">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PASSENGER_HOURS_SA_END.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="passengerHoursSatEnd">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PASSENGER_HOURS_SU_START.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="passengerHoursSunStart">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_PASSENGER_HOURS_SU_END.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="passengerHoursSunEnd">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <h4
+            matTooltip="{{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_COMMERCIAL_HOURS_MAIN.tooltip'
+                | translate
+            }}"
+          >
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_COMMERCIAL_HOURS_MAIN.label'
+                | translate
+            }}
+          </h4>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_COMMERCIAL_HOURS_MF_START.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="commercialHoursWeekStart">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_COMMERCIAL_HOURS_MF_END.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="commercialHoursWeekEnd">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_COMMERCIAL_HOURS_SA_START.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="commercialHoursSatStart">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_COMMERCIAL_HOURS_SA_END.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="commercialHoursSatEnd">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_COMMERCIAL_HOURS_SU_START.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="commercialHoursSunStart">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POE_COMMERCIAL_HOURS_SU_END.label'
+                  | translate
+              }}
+            </mat-label>
+            <mat-select formControlName="commercialHoursSunEnd">
+              <mat-option
+                *ngFor="let timeOption of militaryTimeOptions"
+                [value]="timeOption.apiVal"
+              >
+                {{ timeOption.displayVal }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+
+        <mat-divider
+          *ngIf="projectTypeSelection.value"
+          style="margin: 24px 0px"
+        ></mat-divider>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="yearProjectOperational"
+            #yearProjectOperationalSelect
+          >
+            <mat-option
+              *ngFor="let year of yearOptionsLong"
+              [value]="year.apiVal"
+            >
+              {{ year.displayVal }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="yearProjectOperationalSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.PROJECT_PHASE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.PROJECT_PHASE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="projectPhaseId"
+            #projectPhaseIdSelect
+          >
+            <mat-option
+              *ngFor="let item of projectPhaseOptions"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="projectPhaseIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.PROJECT_PHASE.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            placeholder="Please specify if the project is fully funded. "
+            formControlName="projectFullyFundedId"
+            #projectFullyFundedIdSelect
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option
+                *ngIf="
+                  item.value === '--' ||
+                  item.value === 'Yes' ||
+                  item.value === 'No'
+                "
+                [value]="item.id"
+              >
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+          *ngIf="projectFullyFundedIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            required
+            formControlName="totalProjectCost"
+            matInput
+            type="number"
+            [value]="portOfEntryFields.controls.totalProjectCost.value"
+          />
+          <mat-error
+          *ngIf="portOfEntryFields.get('totalProjectCost').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            required
+            formControlName="fundsStillNeeded"
+            matInput
+            type="number"
+            [value]="portOfEntryFields.controls.fundsStillNeeded.value"
+          />
+          <mat-error
+          *ngIf="portOfEntryFields.get('fundsStillNeeded').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.CONSTRUCTION_PHASE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.CONSTRUCTION_PHASE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            placeholder="Please specify if the project is fully funded. "
+            formControlName="constructionPhaseId"
+            #constructionPhaseIdSelect
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+          *ngIf="constructionPhaseIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.CONSTRUCTION_PHASE.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="environmentalBenefitId"
+            #environmentalBenefitIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.DEGREES_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="environmentalBenefitIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.label'
+                  | translate
+              }}
+            </mat-label>
+          </mat-label>
+          <mat-select
+            required
+            formControlName="economicBenefitId"
+            #economicBenefitIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.DEGREES_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="economicBenefitIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POSITIVE_IMPACT_PASSENGER.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POSITIVE_IMPACT_PASSENGER.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="positiveImpactPassengerId"
+            #positiveImpactPassengerIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.YES_NO"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="positiveImpactPassengerIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POSITIVE_IMPACT_PASSENGER.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POSITIVE_IMPACT_CARGO.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POSITIVE_IMPACT_CARGO.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="positiveImpactCargoId"
+            #positiveImpactCargoIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.YES_NO"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="positiveImpactCargoIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.POE.POSITIVE_IMPACT_CARGO.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <!-- RAIL -->
+      <form
+        formGroup
+        [formGroup]="railroadFields"
+        *ngSwitchCase="
+          'PROJECT_DATA_ENTRY.PROJECT_TYPES.RAIL.label' | translate
+        "
+      >
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.EXISTING_CONDITION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.EXISTING_CONDITION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea matInput required formControlName="existingCondition"></textarea>
+          <mat-error
+          *ngIf="railroadFields.get('existingCondition').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.EXISTING_CONDITION.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.CONDITION_PROJECT_COMPLETION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.CONDITION_PROJECT_COMPLETION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea
+            matInput
+            required
+            formControlName="conditionProjectCompletion"
+          ></textarea>
+          <mat-error
+          *ngIf="railroadFields.get('conditionProjectCompletion').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.CONDITION_PROJECT_COMPLETION.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <h4
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_MAIN.tooltip'
+              | translate
+          }}"
+        >
+          {{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_MAIN.label'
+              | translate
+          }}
+        </h4>
+        <ng-container>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_FROM.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectFrom"
+              matInput
+              required
+              type="string"
+              [value]="railroadFields.controls.limitProjectFrom.value"
+            />
+            <mat-error
+            *ngIf="railroadFields.get('limitProjectFrom').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_FROM.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_TO.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectTo"
+              matInput
+              required
+              type="string"
+              [value]="railroadFields.controls.limitProjectTo.value"
+            />
+            <mat-error
+            *ngIf="railroadFields.get('limitProjectTo').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_TO.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.BEGIN_POST.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectBeginPost"
+              matInput
+              type="number"
+              [value]="railroadFields.controls.limitProjectBeginPost.value"
+            />
+            <mat-error
+            *ngIf="railroadFields.get('limitProjectBeginPost').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.BEGIN_POST.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.END_POST.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectEndPost"
+              matInput
+              type="number"
+              [value]="railroadFields.controls.limitProjectEndPost.value"
+            />
+            <mat-error
+            *ngIf="railroadFields.get('limitProjectEndPost').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.END_POST.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+
+        <mat-divider
+          *ngIf="projectTypeSelection.value"
+          style="margin: 24px 0px"
+        ></mat-divider>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.FREIGHT_PROJECT_ANNUAL_TOTAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.FREIGHT_PROJECT_ANNUAL_TOTAL.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="freightProjAnnualTotalRailCars"
+            matInput
+            type="number"
+            [value]="
+              railroadFields.controls.freightProjAnnualTotalRailCars.value
+            "
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.FREIGHT_PROJECT_PROJECTED_TOTAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.FREIGHT_PROJECT_PROJECTED_TOTAL.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="freightProjProjectedRailCars"
+            matInput
+            type="number"
+            [value]="railroadFields.controls.freightProjProjectedRailCars.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.PASSENGER_PROJECT_ANNUAL_TOTAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.PASSENGER_PROJECT_ANNUAL_TOTAL.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="passProjectsCurrentTotal"
+            matInput
+            type="number"
+            [value]="railroadFields.controls.passProjectsCurrentTotal.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.PASSENGER_PROJECT_PROJECTED_TOTAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.PASSENGER_PROJECT_PROJECTED_TOTAL.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="passProjectProjectedTotal"
+            matInput
+            type="number"
+            [value]="railroadFields.controls.passProjectProjectedTotal.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.GRADE_SEPARATION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.GRADE_SEPARATION.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Select “yes” or “no” to indicate whether the project will include grade separation to alleviate local congestion."
+            formControlName="gradeSeparationId"
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option
+                *ngIf="
+                  item.value === '--' ||
+                  item.value === 'Yes' ||
+                  item.value === 'No'
+                "
+                [value]="item.id"
+              >
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="totalProjectCost"
+            matInput
+            required
+            type="number"
+            [value]="railroadFields.controls.totalProjectCost.value"
+          />
+          <mat-error
+          *ngIf="railroadFields.get('totalProjectCost').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            placeholder="Please specify if the project is fully funded. "
+            formControlName="projectFullyFundedId"
+            #projectFullyFundedIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.YES_NO"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="projectFullyFundedIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="fundsStillNeeded"
+            matInput
+            required
+            type="number"
+            [value]="railroadFields.controls.fundsStillNeeded.value"
+          />
+          <mat-error
+          *ngIf="railroadFields.get('fundsStillNeeded').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="yearProjectOperational"
+            #yearProjectOperationalSelect
+          >
+            <mat-option
+              *ngFor="let year of yearOptionsLong"
+              [value]="year.apiVal"
+            >
+              {{ year.displayVal }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="yearProjectOperationalSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.PROJECT_PHASE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.PROJECT_PHASE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="projectPhaseId"
+            #projectPhaseIdSelect
+          >
+            <mat-option
+              *ngFor="let item of projectPhaseOptions"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="projectPhaseIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.PROJECT_PHASE.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="environmentalBenefitId"
+            #environmentalBenefitIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.DEGREES_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="environmentalBenefitIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="economicBenefitId"
+            #economicBenefitIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.DEGREES_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="economicBenefitIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+                  | translate
+              }}
+            </mat-label>
+          </mat-label>
+          <mat-select
+            required
+            formControlName="portOfEntryLocationId"
+            #portOfEntryLocationIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.PORT_OF_ENTRY_LOCATION"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="portOfEntryLocationIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.RAIL_TERMINUS_TYPE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.RAIL_TERMINUS_TYPE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            placeholder="Select a Rail Terminus Facility Type"
+            formControlName="terminusTypeId"
+            #terminusTypeIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.RAIL_TERMINUS_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="terminusTypeIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.RAIL.RAIL_TERMINUS_TYPE.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea matInput required formControlName="impactPortOfEntry"></textarea>
+          <mat-error
+          *ngIf="railroadFields.get('impactPortOfEntry').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <!-- INTERCHANGE -->
+      <form
+        formGroup
+        [formGroup]="interchangeFields"
+        *ngSwitchCase="
+          'PROJECT_DATA_ENTRY.PROJECT_TYPES.INTERCHANGE.label' | translate
+        "
+      >
+        <mat-form-field
+          style="margin-right: 8px"
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.VEHICLE_TYPE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.VEHICLE_TYPE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Select Vehicle Type"
+            formControlName="vehicleTypeServedId"
+            #vehicleTypeServedIdSelect
+            required
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.VEHICLE_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="vehicleTypeServedIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.VEHICLE_TYPE.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.RAMP.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.RAMP.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="rampDirection"
+            matInput
+            type="string"
+            [value]="interchangeFields.controls.rampDirection.value"
+            required
+          />
+          <mat-error
+          *ngIf="interchangeFields.get('rampDirection').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.RAMP.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.NAME_NEAREST_INTERCHANGE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.NAME_NEAREST_INTERCHANGE.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="nameNearestInterchange"
+            matInput
+            type="string"
+            [value]="interchangeFields.controls.nameNearestInterchange.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.EXISTING_CONDITION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.EXISTING_CONDITION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea matInput formControlName="existingCondition"></textarea>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.CONDITION_PROJECT_COMPLETION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.CONDITION_PROJECT_COMPLETION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea
+            matInput
+            formControlName="conditionProjectCompletion"
+            required
+          ></textarea>
+          <mat-error
+          *ngIf="interchangeFields.get('conditionProjectCompletion').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.CONDITION_PROJECT_COMPLETION.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.ANNUAL_DAILY_TRAFFIC.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.ANNUAL_DAILY_TRAFFIC.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="dailyTrafficStartRate"
+            matInput
+            type="number"
+            [value]="interchangeFields.controls.dailyTrafficStartRate.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.FUTURE_ANNUAL_DAILY_TRAFFIC.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.FUTURE_ANNUAL_DAILY_TRAFFIC.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="dailyTrafficEndRate"
+            matInput
+            type="number"
+            [value]="interchangeFields.controls.dailyTrafficEndRate.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.TRUCK_PERCENT_SHARE_AADT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.TRUCK_PERCENT_SHARE_AADT.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="truckPercentShareAADT"
+            matInput
+            type="number"
+            [value]="interchangeFields.controls.truckPercentShareAADT.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.ACCIDENT_RATE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.ACCIDENT_RATE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Select an Accident Rate"
+            formControlName="accidentRateTypeId"
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.ACCIDENT_RATE_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="totalProjectCost"
+            matInput
+            required
+            type="number"
+            [value]="interchangeFields.controls.totalProjectCost.value"
+          />
+          <mat-error
+          *ngIf="interchangeFields.get('totalProjectCost').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Please specify if the project is fully funded. "
+            formControlName="projectFullyFundedId"
+            required
+            #projectFullyFundedIdSelect
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+          *ngIf="projectFullyFundedIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="fundsStillNeeded"
+            matInput
+            required
+            type="number"
+            [value]="interchangeFields.controls.fundsStillNeeded.value"
+          />
+          <mat-error
+          *ngIf="interchangeFields.get('fundsStillNeeded').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="yearProjectOperational"
+            #yearProjectOperationalSelect
+          >
+            <mat-option
+              *ngFor="let year of yearOptionsLong"
+              [value]="year.apiVal"
+            >
+              {{ year.displayVal }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="yearProjectOperationalSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.PROJECT_PHASE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.PROJECT_PHASE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="projectPhaseId"
+            #projectPhaseIdSelect
+          >
+            <mat-option
+              *ngFor="let item of projectPhaseOptions"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="projectPhaseIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.INTERCHANGE.PROJECT_PHASE.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_BICYCLE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_BICYCLE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Please specify if the project will accommodate bicycle (or other micromobility) lanes/paths."
+            formControlName="multiModeBicycleId"
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_PEDESTRIAN.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_PEDESTRIAN.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Please specify if the project will accommodate pedestrian walkways. It is anticipated
+                that most arterial roadway projects would accommodate pedestrians and bicycle traffic in 2040."
+            formControlName="multiModePedestrianId"
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_HOV.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_HOV.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Please specify if the project will accommodate high occupancy vehicle (HOV) or transit lanes."
+            formControlName="multiModeHOVId"
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select formControlName="environmentalBenefitId">
+            <mat-option
+              *ngFor="let item of lookupValues.DEGREES_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select formControlName="economicBenefitId">
+            <mat-option
+              *ngFor="let item of lookupValues.DEGREES_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="portOfEntryLocationId"
+            #portOfEntryLocationIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.PORT_OF_ENTRY_LOCATION"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="portOfEntryLocationIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TERMINUS_FACILITY.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TERMINUS_FACILITY.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Select a Terminus Facility Type"
+            formControlName="terminusFacilityId"
+            #terminusFacilityIdSelect
+            required
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.TERMINUS_FACILITY_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="terminusFacilityIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TERMINUS_FACILITY.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea matInput required formControlName="impactPortOfEntry"></textarea>
+          <mat-error
+          *ngIf="interchangeFields.get('impactPortOfEntry').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <!-- ROADWAY -->
+      <form
+        formGroup
+        [formGroup]="roadwayFields"
+        *ngSwitchCase="
+          'PROJECT_DATA_ENTRY.PROJECT_TYPES.ROADWAY.label' | translate
+        "
+      >
+        <h4
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_MAIN.tooltip'
+              | translate
+          }}"
+        >
+          {{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_MAIN.label'
+              | translate
+          }}
+        </h4>
+        <ng-container>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_FROM.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              required
+              formControlName="limitProjectFrom"
+              matInput
+              type="string"
+              [value]="roadwayFields.controls.limitProjectFrom.value"
+            />
+            <mat-error
+              *ngIf="roadwayFields.get('limitProjectFrom').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_FROM.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_TO.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              required
+              formControlName="limitProjectTo"
+              matInput
+              type="string"
+              [value]="roadwayFields.controls.limitProjectTo.value"
+            />
+            <mat-error
+              *ngIf="roadwayFields.get('limitProjectTo').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_TO.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.BEGIN_POST.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectBeginPost"
+              matInput
+              type="number"
+              [value]="roadwayFields.controls.limitProjectBeginPost.value"
+            />
+            <mat-error
+              *ngIf="roadwayFields.get('limitProjectBeginPost').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.BEGIN_POST.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.END_POST.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectEndPost"
+              matInput
+              type="number"
+              [value]="roadwayFields.controls.limitProjectEndPost.value"
+            />
+            <mat-error
+            *ngIf="roadwayFields.get('limitProjectEndPost').hasError('required')"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.END_POST.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+
+        <mat-divider
+          *ngIf="projectTypeSelection.value"
+          style="margin: 24px 0px"
+        ></mat-divider>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.VEHICLE_TYPE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.VEHICLE_TYPE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Select Vehicle Type"
+            formControlName="vehicleTypeServedId"
+            #vehicleTypeServedIdSelect
+            required
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.VEHICLE_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+            <mat-error
+              *ngIf="vehicleTypeServedIdSelect.errorState"
+            >
+              {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.VEHICLE_TYPE.label'
+                | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.EXISTING_CONDITION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.EXISTING_CONDITION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea required matInput formControlName="existingCondition"></textarea>
+          <mat-error
+          *ngIf="roadwayFields.get('existingCondition').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.EXISTING_CONDITION.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field style="margin-right: 8px" class="half-width-mat-field">
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.CURRENT_LANES.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="existingConditionLanes"
+            matInput
+            type="number"
+            [value]="roadwayFields.controls.existingConditionLanes.value"
+          />
+        </mat-form-field>
+        <mat-form-field class="half-width-mat-field">
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.CURRENT_FACILITY.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Select Facility Type"
+            formControlName="existingConditionFacilityTypeId"
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.FACILITY_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.CONDITION_PROJECT_COMPLETION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.CONDITION_PROJECT_COMPLETION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea
+            required
+            matInput
+            formControlName="conditionAfterCompletion"
+          ></textarea>
+          <mat-error
+          *ngIf="roadwayFields.get('conditionAfterCompletion').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.CONDITION_PROJECT_COMPLETION.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field style="margin-right: 8px" class="half-width-mat-field">
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.FUTURE_LANES.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="conditionAfterCompletionLanes"
+            matInput
+            type="number"
+            [value]="roadwayFields.controls.conditionAfterCompletionLanes.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.NAME_PARALLEL_FACILITY.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.NAME_PARALLEL_FACILITY.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="nameParallelFacility"
+            matInput
+            type="string"
+            [value]="roadwayFields.controls.nameParallelFacility.value"
+          />
+        </mat-form-field>
+        <mat-form-field class="full-width-mat-field">
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.FUTURE_FACILITY.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Select Facility Type"
+            formControlName="conditionAfterCompletionFacilityTypeId"
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.FACILITY_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.ANNUAL_DAILY_TRAFFIC.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.ANNUAL_DAILY_TRAFFIC.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="dailyTrafficStartRate"
+            matInput
+            type="number"
+            [value]="roadwayFields.controls.dailyTrafficStartRate.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.FUTURE_ANNUAL_DAILY_TRAFFIC.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.FUTURE_ANNUAL_DAILY_TRAFFIC.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="dailyTrafficEndRate"
+            matInput
+            type="number"
+            [value]="roadwayFields.controls.dailyTrafficEndRate.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.TRUCK_PERCENT_SHARE_AADT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.TRUCK_PERCENT_SHARE_AADT.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="truckPercentShareAADT"
+            matInput
+            type="number"
+            [value]="roadwayFields.controls.truckPercentShareAADT.value"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.ACCIDENT_RATE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.ACCIDENT_RATE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Select an Accident Rate"
+            formControlName="accidentRateTypeId"
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.ACCIDENT_RATE_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+          required
+            formControlName="totalProjectCost"
+            matInput
+            type="number"
+            [value]="roadwayFields.controls.totalProjectCost.value"
+          />
+          <mat-error
+          *ngIf="roadwayFields.get('totalProjectCost').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Please specify if the project is fully funded. "
+            formControlName="projectFullyFundedId"
+            #projectFullyFundedIdSelect
+            required
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+          *ngIf="projectFullyFundedIdSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            required
+            formControlName="fundsStillNeeded"
+            matInput
+            type="number"
+            [value]="roadwayFields.controls.fundsStillNeeded.value"
+          />
+          <mat-error
+          *ngIf="roadwayFields.get('fundsStillNeeded').hasError('required')"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="yearProjectOperational"
+            #yearProjectOperationalSelect
+          >
+            <mat-option
+              *ngFor="let year of yearOptionsLong"
+              [value]="year.apiVal"
+            >
+              {{ year.displayVal }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="yearProjectOperationalSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.PROJECT_PHASE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.PROJECT_PHASE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="projectPhaseId"
+            #projectPhaseIdSelect
+          >
+            <mat-option
+              *ngFor="let item of projectPhaseOptions"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="projectPhaseIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.ROADWAY.PROJECT_PHASE.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_BICYCLE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_BICYCLE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Please specify if the project will accommodate bicycle (or other micromobility) lanes/paths."
+            formControlName="multiModeBicycleId"
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_PEDESTRIAN.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_PEDESTRIAN.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Please specify if the project will accommodate pedestrian walkways. It is anticipated
+                that most arterial roadway projects would accommodate pedestrians and bicycle traffic in 2040."
+            formControlName="multiModePedestrianId"
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_HOV.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.MULTIMODAL_HOV.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            placeholder="Please specify if the project will accommodate high occupancy vehicle (HOV) or transit lanes."
+            formControlName="multiModeHOVId"
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ENVIRONMENTAL_BENEFIT.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select formControlName="environmentalBenefitId">
+            <mat-option
+              *ngFor="let item of lookupValues.DEGREES_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.ECONOMIC_BENEFIT.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select formControlName="economicBenefitId">
+            <mat-option
+              *ngFor="let item of lookupValues.DEGREES_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="portOfEntryLocationId"
+            #portOfEntryLocationIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.PORT_OF_ENTRY_LOCATION"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="portOfEntryLocationIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TERMINUS_FACILITY.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TERMINUS_FACILITY.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            placeholder="Select a Terminus Facility Type"
+            formControlName="terminusFacilityId"
+            #terminusFacilityIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.TERMINUS_FACILITY_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="terminusFacilityIdSelect.errorState"
+          >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TERMINUS_FACILITY.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          required
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea required matInput formControlName="impactPortOfEntry"></textarea>
+          <mat-error
+          *ngIf="roadwayFields.get('impactPortOfEntry').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+
+      <!-- CROSSBORDER-->
+      <form
+        formGroup
+        [formGroup]="crossBorderFields"
+        *ngSwitchCase="
+          'PROJECT_DATA_ENTRY.PROJECT_TYPES.CPMF.label' | translate
+        "
+      >
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.PROJECT_TYPE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.PROJECT_TYPE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            placeholder="Select a Crossborder Project Type"
+            formControlName="projectTypeId"
+            #projectTypeIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.CROSS_BORDER_PROJECT_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="projectTypeIdSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.PROJECT_TYPE.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <h4
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_MAIN.tooltip'
+              | translate
+          }}"
+        >
+          {{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_MAIN.label'
+              | translate
+          }}
+        </h4>
+        <ng-container>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_FROM.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectFrom"
+              matInput
+              type="string"
+              [value]="crossBorderFields.controls.limitProjectFrom.value"
+              required
+            />
+            <mat-error
+            *ngIf="crossBorderFields.get('limitProjectFrom').hasError('required')"
+            >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_FROM.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_TO.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectTo"
+              matInput
+              type="string"
+              [value]="crossBorderFields.controls.limitProjectTo.value"
+              required
+            />
+            <mat-error
+            *ngIf="crossBorderFields.get('limitProjectTo').hasError('required')"
+            >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.LIMITS_OF_PROJECT_TO.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            style="margin-right: 8px"
+            class="half-width-mat-field"
+          >
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.BEGIN_POST.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectBeginPost"
+              matInput
+              type="number"
+              [value]="crossBorderFields.controls.limitProjectBeginPost.value"
+            />
+            <mat-error
+            *ngIf="crossBorderFields.get('limitProjectBeginPost').hasError('required')"
+            >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.BEGIN_POST.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="half-width-mat-field">
+            <mat-label>
+              {{
+                'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.END_POST.label'
+                  | translate
+              }}
+            </mat-label>
+            <input
+              formControlName="limitProjectEndPost"
+              matInput
+              type="number"
+              [value]="crossBorderFields.controls.limitProjectEndPost.value"
+            />
+            <mat-error
+            *ngIf="crossBorderFields.get('limitProjectEndPost').hasError('required')"
+            >
+            {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.END_POST.label'
+              | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+
+        <mat-divider
+          *ngIf="projectTypeSelection.value"
+          style="margin: 24px 0px"
+        ></mat-divider>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.EXISTING_CONDITION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.EXISTING_CONDITION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea matInput required formControlName="existingCondition"></textarea>
+          <mat-error
+          *ngIf="crossBorderFields.get('existingCondition').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.EXISTING_CONDITION.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.CONDITION_PROJECT_COMPLETION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.CONDITION_PROJECT_COMPLETION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea
+            matInput
+            required
+            formControlName="conditionProjectCompletion"
+          ></textarea>
+          <mat-error
+          *ngIf="crossBorderFields.get('conditionProjectCompletion').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.CONDITION_PROJECT_COMPLETION.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="totalProjectCost"
+            matInput
+            type="number"
+            [value]="crossBorderFields.controls.totalProjectCost.value"
+            required
+          />
+          <mat-error
+          *ngIf="crossBorderFields.get('totalProjectCost').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TOTAL_PROJECT_COST.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            placeholder="Please specify if the project is fully funded. "
+            formControlName="projectFullyFundedId"
+            #projectFullyFundedIdSelect
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+          *ngIf="projectFullyFundedIdSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="yearProjectOperational"
+            #yearProjectOperationalSelect
+          >
+            <mat-option
+              *ngFor="let year of yearOptionsLong"
+              [value]="year.apiVal"
+            >
+              {{ year.displayVal }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="yearProjectOperationalSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.YEAR_PROJECT_OPERATIONAL.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.PROJECT_PHASE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.PROJECT_PHASE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="projectPhaseId"
+            #projectPhaseIdSelect
+          >
+            <mat-option
+              *ngFor="let item of projectPhaseOptions"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="projectPhaseIdSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.CROSSBORDER.PROJECT_PHASE.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="fundsStillNeeded"
+            matInput
+            type="number"
+            [value]="crossBorderFields.controls.fundsStillNeeded.value"
+            required
+          />
+          <mat-error
+          *ngIf="crossBorderFields.get('fundsStillNeeded').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="portOfEntryLocationId"
+            #portOfEntryLocationIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.PORT_OF_ENTRY_LOCATION"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="portOfEntryLocationIdSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TERMINUS_FACILITY.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TERMINUS_FACILITY.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            placeholder="Select a Terminus Facility Type"
+            formControlName="terminusFacilityId"
+            #terminusFacilityIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.TERMINUS_FACILITY_TYPE"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="terminusFacilityIdSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.TERMINUS_FACILITY.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.label'
+                | translate
+            }}
+          </mat-label>
+          <input matInput required formControlName="projectImpact" />
+          <mat-error
+          *ngIf="crossBorderFields.get('projectImpact').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.HOW_PROJECT_SERVES_POE.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+
+      <!-- SHORT-TERM -->
+      <form
+        formGroup
+        [formGroup]="shortTermFields"
+        *ngSwitchCase="
+          'PROJECT_DATA_ENTRY.PROJECT_TYPES.SHORT_TERM.label' | translate
+        "
+      >
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.SHORT_TERM_PROJECT_LOCATION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.SHORT_TERM_PROJECT_LOCATION.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="projectLocation"
+            matInput
+            type="string"
+            [value]="shortTermFields.controls.projectLocation.value"
+            required
+          />
+          <mat-error
+          *ngIf="shortTermFields.get('projectLocation').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.SHORT_TERM_PROJECT_LOCATION.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.EXISTING_CONDITION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.EXISTING_CONDITION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea matInput required formControlName="existingCondition"></textarea>
+          <mat-error
+          *ngIf="shortTermFields.get('existingCondition').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.EXISTING_CONDITION.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.CONDITION_PROJECT_COMPLETION.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.CONDITION_PROJECT_COMPLETION.label'
+                | translate
+            }}
+          </mat-label>
+          <textarea
+            matInput
+            required
+            formControlName="conditionProjectCompletion"
+          ></textarea>
+          <mat-error
+          *ngIf="shortTermFields.get('conditionProjectCompletion').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.CONDITION_PROJECT_COMPLETION.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.TOTAL_PROJECT_COST.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.TOTAL_PROJECT_COST.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="totalProjectCost"
+            matInput
+            type="number"
+            [value]="shortTermFields.controls.totalProjectCost.value"
+            required
+          />
+          <mat-error
+          *ngIf="shortTermFields.get('totalProjectCost').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.TOTAL_PROJECT_COST.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            placeholder="Please specify if the project is fully funded. "
+            formControlName="projectFullyFundedId"
+            #projectFullyFundedIdSelect
+          >
+            <ng-container *ngFor="let item of lookupValues.YES_NO">
+              <mat-option *ngIf="item.value !== 'N/A'" [value]="item.id">
+                {{ item.value }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+          *ngIf="projectFullyFundedIdSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.PROJECT_FULLY_FUNDED.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+                | translate
+            }}
+          </mat-label>
+          <input
+            formControlName="fundsStillNeeded"
+            matInput
+            type="number"
+            [value]="shortTermFields.controls.fundsStillNeeded.value"
+            required
+          />
+          <mat-error
+          *ngIf="shortTermFields.get('fundsStillNeeded').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.FUNDS_STILL_NEEDED.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="margin-right: 8px"
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.YEAR_PROJECT_OPERATIONAL.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.YEAR_PROJECT_OPERATIONAL.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="yearProjectOperational"
+            #yearProjectOperationalSelect
+          >
+            <mat-option
+              *ngFor="let year of yearOptionsShort"
+              [value]="year.apiVal"
+            >
+              {{ year.displayVal }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="yearProjectOperationalSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.YEAR_PROJECT_OPERATIONAL.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="half-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.PROJECT_PHASE.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.PROJECT_PHASE.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="projectPhaseId"
+            #projectPhaseIdSelect
+          >
+            <mat-option
+              *ngFor="let item of projectPhaseOptions"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="projectPhaseIdSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.PROJECT_PHASE.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+                | translate
+            }}
+          </mat-label>
+          <mat-select
+            required
+            formControlName="portOfEntryLocationId"
+            #portOfEntryLocationIdSelect
+          >
+            <mat-option
+              *ngFor="let item of lookupValues.PORT_OF_ENTRY_LOCATION"
+              [value]="item.id"
+            >
+              {{ item.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+          *ngIf="portOfEntryLocationIdSelect.errorState"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHARED.POE_PRIMARILY_SERVED.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-mat-field"
+          matTooltip="{{
+            'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.HOW_REDUCE_BORDER_WAIT.tooltip'
+              | translate
+          }}"
+        >
+          <mat-label>
+            {{
+              'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.HOW_REDUCE_BORDER_WAIT.label'
+                | translate
+            }}
+          </mat-label>
+          <input matInput required formControlName="howReduceBorderWait" />
+          <mat-error
+          *ngIf="shortTermFields.get('howReduceBorderWait').hasError('required')"
+          >
+          {{ 'PROJECT_DATA_ENTRY.FIELD_NAMES.SHORT_TERM.HOW_REDUCE_BORDER_WAIT.label'
+            | translate }} {{ 'PROJECT_DATA_ENTRY.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,91 @@
+.btns-container {
+  padding-top: 12px;
+  position: absolute;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 32px !important;
+}
+
+.map-button-container {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  margin-bottom: 12px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.zoom-buttons button {
+  border-radius: 0;
+}
+
+.map-button {
+  padding: 0;
+  min-width: 36px;
+  line-height: 36px;
+}
+
+.toggle-layer-row {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 12px;
+}
+
+.toggle-layer-row:hover {
+  background-color: #eee;
+}
+
+.basemap-container {
+  top: 70px;
+  right: 72px;
+  position: absolute;
+  z-index: 1000;
+}
+
+.legend-container {
+  top: 70px;
+  right: 72px;
+  position: absolute;
+  z-index: 1000;
+}
+
+.esri-basemap-gallery {
+  height: 500px;
+}
+
+.esri-legend {
+  max-height: 500px;
+}
+
+.legend {
+  padding: 5px;
+}
+
+.hover-info:hover {
+  background: lightblue;
+}
+
+.hover-info:hover .hidden-info {
+  display: flex;
+}
+
+.hidden-info {
+  display: none;
+  position: absolute;
+  background-color: white;
+  right: 200px;
+  top: 16px;
+  padding-top: 0px;
+  border: 1px solid black;
+  border-radius: 0.35em;
+}
+
+.hidden-info > .mat-list-item-content {
+  height: auto !important;
+}
+
+.hidden-info > .mat-list-item {
+  height: auto !important;
+}

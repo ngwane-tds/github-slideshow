@@ -1,0 +1,70 @@
+<!-- <div class="action-bar">
+  <div style="flex-grow:1">
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Search</mat-label>
+      <input [(ngModel)]="searchString" matInput />
+    </mat-form-field>
+  </div>
+  <div style="width: 8px"></div>
+  <div>
+    <button mat-raised-button color="primary" (click)="discard()">
+      Discard Changes
+    </button>
+  </div>
+  <div style="width: 8px"></div>
+  <div>
+    <button mat-raised-button color="primary" (click)="save()">
+      Save
+    </button>
+  </div>
+</div>
+<mat-tab-group
+  style="height: calc(100vh - 96px)"
+  (selectedTabChange)="tabChange($event)"
+>
+  <mat-tab label="By User">
+    <div style="display: flex; font-size: 14px; padding: 20px 0 20px 0;">
+      <div class="header-col" style="width: 30%; padding-left: 24px">
+        Username
+      </div>
+      <div class="header-col" style="width: 70%">Role</div>
+    </div>
+    <div *ngFor="let user of users" class="user-row mat-tab-body-wrapper">
+      <div class="username-col">{{ user.username }}</div>
+      <mat-form-field style="width: 70%">
+        <mat-select multiple>
+          <mat-select-trigger>
+            <strong>({{ user.roles.length }})</strong>
+            {{ user.roles }}
+          </mat-select-trigger>
+          <mat-option *ngFor="let role of user.roles" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-tab>
+  <mat-tab label="By Role">
+    <div style="display: flex; font-size: 14px; padding: 20px 0 20px 0;">
+      <div class="header-col" style="width: 30%; padding-left: 24px">Role</div>
+      <div class="header-col" style="width: 70%">Usernames</div>
+    </div>
+    <div *ngFor="let role of roles" class="user-row mat-tab-body-wrapper">
+      <div class="username-col">{{ role.role }}</div>
+      <mat-form-field style="width: 70%">
+        <mat-select multiple>
+          <mat-select-trigger>
+            <strong>({{ role.usernames.length }})</strong>
+            {{ role.usernames }}
+          </mat-select-trigger>
+          <mat-option
+            *ngFor="let username of role.usernames"
+            [value]="username"
+          >
+            {{ username }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-tab>
+</mat-tab-group> -->

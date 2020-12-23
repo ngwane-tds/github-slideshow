@@ -1,0 +1,77 @@
+<div class="btns-container">
+  <div class="map-button-container mat-elevation-z2">
+    <button mat-button class="map-button" (click)="goHome()">
+      <mat-icon>home</mat-icon>
+    </button>
+  </div>
+
+  <div class="map-button-container mat-elevation-z2">
+    <button mat-button class="map-button" (click)="zoomIn()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-button class="map-button" (click)="zoomOut()">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </div>
+
+  <div class="map-button-container mat-elevation-z2">
+    <button
+      mat-raised-button
+      class="map-button"
+      matTooltip="Base map"
+      matTooltipClass="tool-tip-class"
+      (click)="toggleBasemapGallery()"
+    >
+      <mat-icon>map</mat-icon>
+    </button>
+    <div
+      class="basemap-container mat-elevation-z4"
+      [hidden]="!showBasemapGallery"
+    >
+      <div id="basemapGallery"></div>
+    </div>
+  </div>
+
+  <div class="map-button-container mat-elevation-z2">
+    <button
+      mat-raised-button
+      class="map-button"
+      matTooltip="Reference Layers"
+      matTooltipClass="tool-tip-class"
+      [matMenuTriggerFor]="refLayerMenu"
+    >
+      <mat-icon>layers</mat-icon>
+    </button>
+  </div>
+
+  <div class="map-button-container mat-elevation-z2">
+    <button
+      mat-raised-button
+      class="map-button"
+      matTooltip="Map Legend"
+      matTooltipClass="tool-tip-class"
+      (click)="toggleLegend()"
+    >
+      <mat-icon>info</mat-icon>
+    </button>
+    <div class="legend-container mat-elevation-z4" [hidden]="!showLegend">
+      <div id="legendContainer"></div>
+    </div>
+  </div>
+
+  <mat-spinner [diameter]="35" *ngIf="isMapLoading | async"></mat-spinner>
+
+  <mat-menu #refLayerMenu="matMenu" [overlapTrigger]="false">
+    <div>
+      <div
+        *ngFor="let layerInfo of layers"
+        (click)="toggleLayer($event, layerInfo)"
+        class="toggle-layer-row"
+      >
+        <mat-icon *ngIf="layerInfo.layer.visible" color="primary">check_box</mat-icon>
+        <mat-icon *ngIf="!layerInfo.layer.visible">check_box_outline_blank</mat-icon>
+        {{ layerInfo.alias }}
+      </div>
+    </div>
+  </mat-menu>
+</div>

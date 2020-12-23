@@ -1,0 +1,54 @@
+<app-header></app-header>
+<div class="dashboard-vertical-scroll">
+  <div class="dashboard-row">
+    <mat-card class="pie-chart-card" [class.mat-elevation-z8]="elevateCard">
+      <div class="pie-chart-container">
+        <!-- <div class="chart" style="flex-grow: 1;" *ngIf="isDataAvailable"> -->
+        <mat-card-header
+          [style.backgroundColor]="'white'"
+          class="pie-chart-card-header"
+        >
+          <mat-card-title>Projects by Type</mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngIf="chart1Data && chart1Labels">
+          <app-chart-1
+            [chart1Data]="chart1Data | async"
+            [labels]="chart1Labels | async"
+          ></app-chart-1>
+        </mat-card-content>
+      </div>
+    </mat-card>
+    <mat-card class="pie-chart-card" [class.mat-elevation-z8]="elevateCard">
+      <div class="pie-chart-container">
+        <!-- <div class="chart" style="flex-grow: 1;" *ngIf="isDataAvailable"> -->
+        <mat-card-header
+          [style.backgroundColor]="'white'"
+          class="pie-chart-card-header"
+        >
+          <mat-card-title
+            >Number of projects by type by short-term, medium-term, and
+            long-term</mat-card-title
+          >
+        </mat-card-header>
+        <mat-card-content *ngIf="chart2Data && chart2Labels">
+          <app-chart-2 [chart2Data]="chart2Data | async"></app-chart-2>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </div>
+  <div class="dashboard-row">
+    <mat-card class="bar-chart-card" [class.mat-elevation-z8]="elevateCard">
+      <div class="bar-line-chart-container">
+        <mat-card-header [style.backgroundColor]="'white'">
+          <mat-card-title>Total Project Cost By Type</mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngIf="chart3Data">
+          <app-chart-3
+            [chart3Data]="chart3Data | async"
+            [labels]="chart3Labels | async"
+          ></app-chart-3>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </div>
+</div>

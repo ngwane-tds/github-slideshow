@@ -1,0 +1,61 @@
+<div *ngIf="!(loaded | async)">
+  <mat-spinner
+      strokeWidth="3"
+      diameter="35"
+      aria-label="Loading">
+  </mat-spinner>
+</div>
+
+<div class="dph" *ngIf="(loaded | async)">
+  <div class="dph-row">
+    <span class="dph-project-id">{{ 'DETAILS.PROJECT_NUMBER' | translate }}: {{projectNumber}}</span>
+  </div>
+  <div class="dph-row">
+    <span>{{ 'DETAILS.PROJECT_STATUS' | translate }}:
+    <span [ngClass]="{
+      'dph-status-draft': projectStatus == 'Draft',
+      'dph-status-submitted': projectStatus == 'Submitted',
+      'dph-status-submitted-es': projectStatus == 'Enviado',
+      'dph-status-in-prog': projectStatus == 'In Progress',
+      'dph-status-in-prog-es': projectStatus == 'En Progreso'
+      }">
+    {{projectStatus}}</span></span>
+  </div>
+  <div class="dph-row">
+    <span>{{ 'DETAILS.CREATED_BY' | translate }}: {{projectCreatedBy.value}}</span>
+  </div>
+
+  <div class="dph-row">
+
+    <div *ngIf="!(systemOpen | async) && !(isAdmin | async)" class="dph-row dph-system-status">
+      <span class="dph-system-msg">{{ 'DETAILS.SYSTEM_CLOSED' | translate }}</span>
+    </div>
+
+    <div class="dph-actions" *ngIf="(systemOpen | async) || (isAdmin | async)">
+
+      <button [disabled]="!(canSave | async)" class="dph-button" mat-raised-button color="primary" (click)="save()">
+      <mat-icon>save</mat-icon>
+      {{ 'DETAILS.SAVE' | translate }}
+      </button>
+
+      <button [disabled]="!(canDelete | async)" style="margin-left: 8px;" class="dph-button" mat-raised-button color="primary" (click)="delete()">
+      <mat-icon>delete</mat-icon>
+      {{ 'DETAILS.DELETE_PROJECT' | translate }}
+      </button>
+
+      <!-- Submit disabled until geometry check can be added -->
+      <!--<button [disabled]="true" style="margin-left: 8px;" class="dph-button" mat-raised-button color="primary" (click)="submit()">-->
+      <button [disabled]="!(ableToSubmit | async)" style="margin-left: 8px;" class="dph-button" mat-raised-button color="primary" (click)="submit()">
+        <mat-icon>check</mat-icon>
+        {{ 'DETAILS.SUBMIT_PROJECT' | translate }}
+        </button>
+
+      <div *ngIf="(hasGeometry | async)">
+        <button style="margin-left: 8px;" class="dph-button" mat-raised-button color="primary" (click)="zoomTo()">
+        <mat-icon>place</mat-icon>
+        {{ 'DETAILS.ZOOM_TO' | translate }}</button>
+      </div>
+
+    </div>
+  </div>
+<div>

@@ -1,0 +1,106 @@
+:host {
+    height: 100vh;
+    width: 100vw;
+    display: block;
+    overflow: hidden;     
+}
+
+.admin-outer-container {
+    margin-top: 60px;
+    padding: 25px;  
+  }  
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top:10px;
+  }
+  
+  .button-container button {
+    margin-right: 10px;
+  }
+
+.lookup-select {
+    background:#fff;
+    padding: 10px;
+    display:flex;
+    justify-content: space-between;
+}
+
+.user-add-button {
+    background:#fff;
+    padding: 10px;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.lookup-add-item-button {
+    height:0%;
+    align-self:center;
+}
+
+.board-meeting-add-button {
+    background: #fff;
+    padding: 10px;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.user-card-header {
+    margin-bottom:10px;
+}
+
+.no-data {
+    background-color:#fff;
+    padding:20px;
+}
+
+.spinner {
+    margin: 0 auto;
+    margin-top:100px;
+}
+
+.spinner-processing {
+    display:inline-flex;
+    margin-right:10px;
+}
+
+.row {
+    cursor: pointer;
+}
+
+.mat-header-cell {
+    white-space: nowrap;
+    padding-right:15px;
+}
+
+.mat-cell {
+    white-space: nowrap;
+    padding-right:15px;
+} 
+
+#editUser {
+    display: none;
+}
+
+mat-form-field {  
+    width: 380px;
+}
+
+.error {
+    color:red;    
+    padding-top: 10px;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

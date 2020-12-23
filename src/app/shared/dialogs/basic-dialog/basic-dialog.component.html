@@ -1,0 +1,19 @@
+<div class="basic-dialog-titlebar mat-elevation-hairline">
+
+  <div class="basic-dialog-title">{{data.title}}</div>
+  <div style="flex-grow:1"></div>
+</div>
+
+<div class="basic-dialog-body-container">
+
+  <div class="basic-dialog-content mat-dialog-content" style="flex: 1;">
+    <span>{{data.message}}</span>
+    <div [innerHTML]="htmlMessage"></div>
+  </div>
+
+  <mat-dialog-actions>
+      <button mat-raised-button class="basic-button" color="primary" (click)="closeDialog(true)">Ok</button>
+      <button mat-raised-button class="basic-button" color="primary" (click)="closeDialog(false)">Cancel</button>
+  </mat-dialog-actions>
+
+</div>

@@ -1,0 +1,57 @@
+<app-header></app-header>
+<div class="outer-container">
+  <!-- <mat-spinner
+    *ngIf="loadingTable | async"
+    strokeWidth="5"
+    diameter="100"
+    aria-label="Loading"
+    class="spinner"
+  >
+  </mat-spinner> -->
+
+  <ng-container>
+    <div class="report-table">
+      <report-table></report-table>
+    </div>
+  </ng-container>
+  <!-- <div class="inner-container" *ngIf="!(loadingTable | async)">
+        <div class="report-select">
+            <mat-form-field floatLabel="never">
+                <mat-select placeholder="Select report" (selectionChange)="onReportSelect($event)"
+                    [(value)]="selectedReport">
+                    <mat-option *ngFor="let item of luReports" [value]="item.id">
+                        {{ item.value }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="report-button-container" *ngIf="selectedReport">
+                <mat-form-field class="search-input">
+                    <input matInput type="text" placeholder="Search" [(ngModel)]="searchText">
+                    <button mat-button *ngIf="searchText" class="clear-search-button" matSuffix aria-label="Clear">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+                <button mat-button class="search-button" matTooltip="Search" matTooltipClass="tool-tip-class"
+                    (click)="search()">
+                    <mat-icon>search</mat-icon>
+                </button>
+
+                <button class="export-button" mat-raised-button (click)="export()" color="primary">Export</button>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <ng-container *ngIf="dataSource | async">
+            
+            <div class="report-definition">{{reportDefinition | async}}</div>
+            <div class="loading-shade" *ngIf="loadingTable | async">
+                <mat-spinner></mat-spinner>
+            </div>
+            <div class="report-table">
+                <report-table [dataSource]="dataSource | async" (sortChange)="sortChange($event)"></report-table>
+            </div>
+        </ng-container>
+
+    </div> -->
+</div>

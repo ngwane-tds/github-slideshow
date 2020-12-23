@@ -1,0 +1,23 @@
+<div style="padding: 8px; height: 100px">
+  <app-details-pane-header (saveEvent)="onSaveClicked($event)" (deleteEvent)="onDeleteClicked($event)" (submitEvent)="onSubmitClicked($event)"></app-details-pane-header>
+
+  <mat-tab-group (selectedTabChange)="onTabChanged($event)">
+
+    <mat-tab  label="{{ 'TABS.PROJECT_DETAILS' | translate }}">
+      <div class="tab">
+        <app-project-details-tab [isSaveClicked]="isSaveClicked" [isDeleteClicked]="isDeleteClicked" [isSubmitClicked]="isSubmitClicked"></app-project-details-tab>
+      </div>
+    </mat-tab>
+
+    <ng-container *ngIf="(canEditGeometry | async)">
+      <mat-tab label="{{ 'TABS.GEOMETRY' | translate }}">
+        <div class="tab">
+          <ng-template matTabContent>
+            <app-geometry-tab></app-geometry-tab>
+          </ng-template>
+        </div>
+      </mat-tab>
+    </ng-container>
+
+  </mat-tab-group>
+</div>

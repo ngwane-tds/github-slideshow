@@ -1,0 +1,527 @@
+{
+  "ADMIN_TAB": {
+    "USERS_TAB": "Users",
+    "SYSTEM_TAB": "System",
+    "TOGGLE_SYSTEM_OPEN": "Open For Project Input and Submission"
+  },
+  "REPORTS_TAB": {
+    "SELECT_REPORT": "Select a project type",
+    "EXPORT_OPTIONS": [
+      {
+        "ENDPOINT_NAME": "ROADWAY",
+        "DESCRIPTION": "Roadway"
+      },
+      {
+        "ENDPOINT_NAME": "INTERCHANGE",
+        "DESCRIPTION": "Interchange"
+      },
+      {
+        "ENDPOINT_NAME": "RAILROAD",
+        "DESCRIPTION": "Railroad"
+      },
+      {
+        "ENDPOINT_NAME": "PORT_OF_ENTRY",
+        "DESCRIPTION": "Port of Entry"
+      },
+      {
+        "ENDPOINT_NAME": "CROSS_BORDER",
+        "DESCRIPTION": "Crossborder Pedestrian and Micromobility Facilities (CPMF)"
+      },
+      {
+        "ENDPOINT_NAME": "SHORT_TERM",
+        "DESCRIPTION": "Short-term Operational & Minor Capital Investments to Reduce Border Wait Times"
+      }
+    ],
+    "EXPORT_BUTTON": "Export"
+  },
+  "NAVBAR": {
+    "SELECT_LANGUAGE": "Select Language",
+    "APP_NAME": "BMP Data Portal",
+    "HOME": "Home",
+    "REPORTS": "Reports",
+    "DASHBOARD": "Dashboard",
+    "ADMIN": "Admin",
+    "LOGOUT": "Logout"
+  },
+  "TABS": {
+    "PROJECT_DETAILS": "Project Details",
+    "GEOMETRY": "Geometry"
+  },
+  "DETAILS": {
+    "PROJECT_NUMBER": "Project Number",
+    "PROJECT_STATUS": "Project Status",
+    "CREATED_BY": "Created By",
+    "SAVE": "Save",
+    "DELETE_PROJECT": "Delete Project",
+    "ZOOM_TO": "Zoom To",
+    "SUBMIT_PROJECT": "Submit Project",
+    "SYSTEM_CLOSED": "System Closed for Data Entry"
+  },
+  "MAP": {
+    "BASEMAP": "Base Map",
+    "REF": "Reference Layers",
+    "LEGEND": "Legend"
+  },
+  "GEOMETRY": {
+    "SYSTEM_CLOSED": "Cannot Edit Geometry",
+    "SAVE_WARNING": "You cannot add geometry until you save your basic project details first.",
+    "EDIT_WARNING": "You do not have permission to edit this project's geometry.",
+    "CANCEL_EDIT": "Cancel",
+    "COMPLETE_EDIT": "Save",
+    "NEW_POINT": "New Point Feature",
+    "NEW_LINE": "New Line Feature",
+    "UPDATE": "Update Feature",
+    "DELETE": "Delete Feature",
+    "FEATURE_COUNT": "Feature Count",
+    "TYPE": "Geometry Type",
+    "INSTRUCTIONS_CREATE_TITLE": "Create Feature Instructions",
+    "INSTRUCTIONS_UPDATE_TITLE": "Update Feature Instructions",
+    "INSTRUCTIONS_CREATE_MODE": "Create Mode:",
+    "INSTRUCTIONS_CREATE_ITEM1": "Mouse cursor will display as a 'crosshair' on the map.",
+    "INSTRUCTIONS_CREATE_POINT": "Create Point:",
+    "INSTRUCTIONS_CREATE_ITEM2": "'Single click' a location on the map.",
+    "INSTRUCTIONS_CREATE_LINE": "Create Line:",
+    "INSTRUCTIONS_CREATE_ITEM3": "'Single click' a location on the map to create vertex, 'double click' to complete the line.",
+    "INSTRUCTIONS_UPDATE_POINT": "Update Point:",
+    "INSTRUCTIONS_UPDATE_ITEM1": "Your point will be highlighted in blue.  Single click the point and hold your mouse button down.  You can drag the point to a new location and release the mouse button.",
+    "INSTRUCTIONS_UPDATE_LINE": "Update Line:",
+    "INSTRUCTIONS_UPDATE_ITEM2": "Your line will be highlighted in blue.  You will see a series of 'vertices' (dots) along the line.  You can click on a vertex to select it.  Once selected, you can drag the vertex to a new location.",
+    "INSTRUCTIONS_UPDATE_COMPLETE": "Complete Update:",
+    "INSTRUCTIONS_UPDATE_ITEM3": "Click 'save' to complete your edit or 'cancel' to discard your changes."
+  },
+  "TABLE": {
+    "AGENCY": "Agency",
+    "USER": "User",
+    "SEARCH": "Search",
+    "MATCH_ALL_FILTERS": "Match all filters",
+    "RESULT_COUNT": "Result Count:",
+    "HIDE_FILTERS": "Hide Filters",
+    "ITEMS_PER_PAGE": "Items per page:",
+    "OF": "of",
+    "PROJECT_NUMBER": "Project Number",
+    "PROJECT_NAME": "Project Name",
+    "PROJECT_DESCRIPTION": "Project Description",
+    "PROJECT_TYPE": "Project Type",
+    "POE_SERVED": "POE Served",
+    "PROJECT_PHASE": "Project Phase",
+    "STATUS": "Status",
+    "JURISDICTION": "Jurisdiction",
+    "CREATED_DATE": "Created Date",
+    "TOTAL_PROJECT_COST": "Total Project Cost",
+    "YEAR_PROJECT_OPERATIONAL": "Year Project Operational",
+    "TERM_SELECTION": "Time Period",
+    "APPLY_FILTER": {
+      "label": "Apply Filter",
+      "tooltip": "Filter list"
+    },
+    "CLEAR_FILTER": {
+      "label": "",
+      "tooltip": "Clear filters"
+    },
+    "CLEAR_TABLE_SELECTION": {
+      "label": "Clear Selection",
+      "tooltip": "Clear Table Selection"
+    }
+  },
+  "PROJECT_DATA_ENTRY": {
+    "REQUIRED": "is required",
+    "VALIDATION_ERROR": {
+      "PROJECT_TYPE_GENERAL": "Project type is required.",
+      "JURISDICTION": "Jurisdiction is required."
+    },
+    "PROJECT_TYPES": {
+      "ROADWAY": {
+        "label": "Roadway",
+        "tooltip": "Roadway capital roadway projects by jurisdiction"
+      },
+      "INTERCHANGE": {
+        "label": "Interchange",
+        "tooltip": "Interchange projects by jurisdiction"
+      },
+      "RAIL": {
+        "label": "Rail",
+        "tooltip": "Railroad projects could include rail grade separations and trolley or bus rapid transit projects"
+      },
+      "POE": {
+        "label": "POE",
+        "tooltip": "Port of Entry projects"
+      },
+      "CPMF": {
+        "label": "Crossborder Pedestrian and Micromobility Facilities (CPMF)",
+        "tooltip": "Crossborder pedestrian and micromobility facilities – Walking, bicycling, and other micro-mobility capital infrastructure projects. Pedestrian projects include pedestrian crossings, traffic calming, and sidewalk design projects. Micromobility are small, low-speed vehicles that are personally owned or available for shared use. Vehicles may be non-motorized or motorized and includes bikes, e-bikes, kick scooters, mopeds, e-scooters and other rideables. Bicycle project types include bike paths, bike lanes/routes, signage, support facilities, and other types of bike projects. Supporting amenities like secure storage, repair/fix-it stations, and device charging options are project types."
+      },
+      "SHORT_TERM": {
+        "label": "Short-term Operational & Minor Capital Investments to Reduce Border Wait Times",
+        "tooltip": "Short-term operational and minor capital investment projects are projects that intend to facilitate federal processing of pedestrians and vehicles at the POEs and thus expedite the flow of people and cargo. Minor capital investment projects are infrastructure improvements that have a relatively low monetary cost and may be stand-alone projects or associated with an operational improvement. Three distinguishing characteristics of projects are: \n 1)  The projects have completion dates within the “short term” timeframe of 2020-2024 \n 2)  The projects have a clear nexus to reducing border wait times \n 3)  The capital project has a cost of less than $1.25 million U.S. dollars \n\n Short-term operational and minor capital investment projects to reduce border wait times will be cataloged for reference but not ranked. The projects could be included in an existing and approved planning document or they may be innovative ideas for reducing border wait times not included in any planning document."
+      }
+    },
+    "FIELD_NAMES": {
+      "SHARED": {
+        "PROJECT_TYPE_GENERAL": {
+          "label": "Project Type",
+          "tooltip": "Please select the type of project"
+        },
+        "JURISDICTION": {
+          "label": "Jurisdiction",
+          "tooltip": "Please provide the name of the county or municipality where the project is located."
+        },
+        "PERSON_NAME": {
+          "label": "Name of person entering data ",
+          "tooltip": "First and last name"
+        },
+        "PROJECT_NAME": {
+          "label": "Project Name",
+          "tooltip": "Please provide the project name as you want it to appear in BMP report."
+        },
+        "PROJECT_DESCRIPTION": {
+          "label": "Project Description",
+          "tooltip": "Please provide a brief description of the project as you want it to appear in BMP report."
+        },
+        "PORT_OF_ENTRY_LOCATION": {
+          "label": "Project Location",
+          "tooltip": "Please select the POE where projected is located."
+        },
+        "PORT_OF_ENTRY_LOCATION_OTHER": {
+          "label": "Other Location",
+          "tooltip": "Please specify the location."
+        },
+        "TOTAL_PROJECT_COST": {
+          "label": "Total Project Cost (2015 $USD)",
+          "tooltip": "Please report the total cost of project in 2015 U.S. dollars."
+        },
+        "PROJECT_FULLY_FUNDED": {
+          "label": "Is Project Fully funded?",
+          "tooltip": "Please specify if project is fully funded."
+        },
+        "FUNDS_STILL_NEEDED": {
+          "label": "Funds Needed to Complete Project",
+          "tooltip": "Some projects will be partially funded; others will have no funding at all. Please report the amount of funds needed to complete the project. If project is fully funded, then respond n/a. Otherwise, please report amount needed in 2015 U.S. dollars."
+        },
+        "ENVIRONMENTAL_BENEFIT": {
+          "label": "Environmental Benefit",
+          "tooltip": "Please use the dropdown menu to select your response. TWG representatives are asked to review information from existing planning and environmental documents to assess if the environmental benefit of the project is “high,” “medium,” or “low.”  TWG representatives should consider factors such as air quality, habitat mitigation, etc."
+        },
+        "ECONOMIC_BENEFIT": {
+          "label": "Community and Economic Benefit",
+          "tooltip": "Please use the dropdown menu to select your responses. TWG representatives are asked to review information from existing planning/engineering and other documents to assess if the community and economic benefits of the project are “high,” “medium,” or “low.” TWG representatives should consider factors such as safety, mobility, access, economic development, and job and output creation."
+        },
+        "POE_PRIMARILY_SERVED": {
+          "label": "POE Primarily Served by the Project",
+          "tooltip": "Use the dropdown menu to select the POE that the project primarily serves. Please select only one POE. You may type in the name of a new POE if it is not listed in the dropdown menu."
+        },
+        "HOW_PROJECT_SERVES_POE": {
+          "label": "How Project Serves a POE",
+          "tooltip": "Please explain how the project serves a POE."
+        },
+        "VEHICLE_TYPE": {
+          "label": "Vehicle Type Primarily Served",
+          "tooltip": "Please specify if the project primarily serves commercial vehicles, passenger vehicles, or both passenger and commercial vehicles."
+        },
+        "LIMITS_OF_PROJECT_MAIN": {
+          "label": "Limits of Project",
+          "tooltip": "Please provide the limits of the project including From and To as well as beginning and ending post mile markers."
+        },
+        "LIMITS_OF_PROJECT_FROM": {
+          "label": "Limits of Project (from)",
+          "tooltip": ""
+        },
+        "LIMITS_OF_PROJECT_TO": {
+          "label": "Limits of Project (to)",
+          "tooltip": ""
+        },
+        "BEGIN_POST": {
+          "label": "Begin Post (mile of km)",
+          "tooltip": ""
+        },
+        "END_POST": {
+          "label": "End Post (mile or km)",
+          "tooltip": ""
+        },
+        "MULTIMODAL_BICYCLE": {
+          "label": "Mulitmodal Benefits—Bicycle / Micromobility",
+          "tooltip": "Please specify if the project will accommodate bicycle (or other micromobility) lanes/paths. It is anticipated that most arterial roadway projects would accommodate pedestrians and bicycle traffic in 2040."
+        },
+        "MULTIMODAL_PEDESTRIAN": {
+          "label": "Multimodal Benefits—Pedestrian",
+          "tooltip": "Please specify if the project will accommodate pedestrian walkways. It is anticipated that most arterial roadway projects would accommodate pedestrians and bicycle traffic in 2040."
+        },
+        "MULTIMODAL_HOV": {
+          "label": "Multimodal Benefits—HOV / Transit",
+          "tooltip": "Please specify if the project will accommodate high occupancy vehicle (HOV) or transit lanes."
+        },
+        "TERMINUS_FACILITY": {
+          "label": "Terminus Facility or Connected to a Terminus Facility",
+          "tooltip": "Use the dropdown menu to select your response. Select “On a terminus facility” if the project is on a segment that has a terminus at a POE (called a “terminus facility.”) Select “Connects to a terminus facility” if the project does not terminate at a POE but does connect to a terminus facility. Select “Neither” if neither situation applies."
+        },
+        "YEAR_PROJECT_OPERATIONAL": {
+          "label": "Year Project Becomes Operational",
+          "tooltip": "Please use dropdown menu to select year. All projects must be planned for completion by 2040."
+        }
+      },
+      "POE": {
+        "POE_PROJECT_TYPE": {
+          "label": "Type of POE Project",
+          "tooltip": "Use the dropdown menu to select the type of POE, e.g., existing passenger POE, existing commercial POE, new passenger and commercial POE, etc. Please select only one POE project type."
+        },
+        "PROJECT_PHASE": {
+          "label": "Current Phase of the Project",
+          "tooltip": "The current phase of the project will be reported as “conceptual planning” or “advanced planning (plans and specifications),” or “presidential permit.” *CONCEPTUAL PLANNING: GSA Feasibility Study, INDAABIN Proyecto Conceptual *ADVANCED PLANNING: (Plans and Specifications)- Environmental Documents (CEQA/NEPA), GSA Prospectus for Site Design and Funding, GSA Program Development Study, GSA Architectural Plans and Specifications, INDAABIN Plan Maestro *PRESIDENTIAL PERMIT: Presidential Permit application, GSA Prospectus for Construction, INDAABIN Proyecto Ejecutivo, Approval of Mexico’s Comisión Intersecretarial, Mexico’s Permiso Presidencia "
+        },
+        "PROJECT_DESCRIPTION": {
+          "label": "Project Description",
+          "tooltip": "Please provide a brief description of the project including additional number of lanes, lane types, or new facilities that will be provided by this project."
+        },
+        "EXISTING_CONDITION": {
+          "label": "Existing Condition",
+          "tooltip": "Please describe the existing condition including current number of lanes by lane types."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condition after Project Completion",
+          "tooltip": "Please describe the condition after project improvement including future planned number of lanes by type or total. For instance, if the project will expand the number of passenger vehicle lanes, please provide the total number of lanes for passenger vehicles, SENTRI, READY, and bus. If the project is an expansion of truck lanes, then provide the total number of lanes for regular trucks, FAST, and if available, number of “empty only” truck lanes. If project will include a dedicated lane (medical lane, bike lane/micromobility), please include that information."
+        },
+        "POE_PASSENGER_HOURS_MAIN": {
+          "label": "Passenger POE:  Hours of Operation (2040)",
+          "tooltip": "Please provide the planned daily range of hours of operation for 2040 (e.g. 0700-2200) for Monday-Friday, Saturday, and Sunday."
+        },
+        "POE_PASSENGER_HOURS_MF_START": {
+          "label": "Monday thru Friday Start Time",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_MF_END": {
+          "label": "Monday thru Friday End Time",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_SA_START": {
+          "label": "Saturday Start Time",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_SA_END": {
+          "label": "Saturday End Time",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_SU_START": {
+          "label": "Sunday Start Time",
+          "tooltip": ""
+        },
+        "POE_PASSENGER_HOURS_SU_END": {
+          "label": "Sunday End Time",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_MAIN": {
+          "label": "Commercial POE:  Hours of Operation (2040)",
+          "tooltip": "Please provide the planned daily range of hours of operation for 2040 (e.g. 0700-2200) for Monday-Friday, Saturday, and Sunday."
+        },
+        "POE_COMMERCIAL_HOURS_MF_START": {
+          "label": "Monday thru Friday Start Time",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_MF_END": {
+          "label": "Monday thru Friday End Time",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_SA_START": {
+          "label": "Saturday Start Time",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_SA_END": {
+          "label": "Saturday End Time",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_SU_START": {
+          "label": "Sunday Start Time",
+          "tooltip": ""
+        },
+        "POE_COMMERCIAL_HOURS_SU_END": {
+          "label": "Sunday End Time",
+          "tooltip": ""
+        },
+        "POSITIVE_IMPACT_PASSENGER": {
+          "label": "Positive impact other modes of passenger crossings",
+          "tooltip": "Please use the dropdown menu to select your response. Does the POE project positively impact other modes of passenger crossings: passenger vehicle lanes, SENTRI or READY passenger vehicle lanes, bus lanes, or pedestrian lanes? A 'positive impact' means that the project is anticipated to reduce demand on another mode(s) of transportation. For example, expanding the number of SENTRI lanes at an existing POE by building new lanes for SENTRI would have a positive impact on regular passenger vehicle traffic by decreasing wait times in regular passenger vehicle lanes. On the other hand, a project to increase the number of SENTRI lanes at an existing POE by converting existing regular lanes for SENTRI use would have a negative impact on the demand for regular passenger vehicle traffic by increasing wait times in the regular lanes."
+        },
+        "POSITIVE_IMPACT_CARGO": {
+          "label": "Positive impact other modes of Cargo crossings",
+          "tooltip": "Please use the dropdown menu to select your response. Does the POE project positively impact other modes of cargo crossings: rail, regular truck lanes, or FAST truck lanes? See additional information for similar question for passenger crossings."
+        },
+        "CONSTRUCTION_PHASE": {
+          "label": "Construction Phase",
+          "tooltip": "Will project be under construction in short term i.e., by Dec. 31, 2024?"
+        }
+      },
+      "RAIL": {
+        "PROJECT_PHASE": {
+          "label": "Current Phase of the Project",
+          "tooltip": "The current phase of the project will be reported as “final design,” or “advanced planning/preliminary engineering/environmental,” or “conceptual planning.” *FINAL DESIGN: Final design includes pre-construction activities such as completing the plans and specifications and other engineering work so that the project will be ready for construction and can enter into a full-funding grant agreement. Projects in this phase must have an approved environmental document. *ADVANCED PLANNING: Advanced planning/preliminary engineering/environmental includes projects that are in the project study report (PSR) phase, conducting preliminary engineering, including geometric design of specific projects, or preparing an environmental document *CONCEPTUAL PLANNING: Conceptual planning includes those projects that are undergoing a corridor or feasibility study including developing alternative analyses and costs.  "
+        },
+        "EXISTING_CONDITION": {
+          "label": "Existing Condition",
+          "tooltip": "Please describe the existing condition."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condition after Project Completion",
+          "tooltip": "Please describe the condition after project improvement."
+        },
+        "FREIGHT_PROJECT_ANNUAL_TOTAL": {
+          "label": "Freight Projects: Annual Total Number of Rail Cars (2015)",
+          "tooltip": "Please type in your response. Please enter one value for annual total number of rail cars. Please do not use ranges. Number of rail cars for 2015 will not be available for new rail projects; therefore, please enter zero “0” for number of rail cars 2015."
+        },
+        "FREIGHT_PROJECT_PROJECTED_TOTAL": {
+          "label": "Freight Projects: Projected Annual Number of Rail Cars (2040)",
+          "tooltip": "Please type in your response for projected 2040 annual total number of rail cars. Please enter one value for number of rail cars. Please do not use ranges."
+        },
+        "PASSENGER_PROJECT_ANNUAL_TOTAL": {
+          "label": "Passenger Projects – Annual Total Number of Passengers (2015)",
+          "tooltip": "Please type in your response. Please enter one value for number of passengers be provided. Please do not use ranges. Number of passengers for 2015 will not be available for new rail projects; therefore, please enter zero “0” for the number of passengers in 2015."
+        },
+        "PASSENGER_PROJECT_PROJECTED_TOTAL": {
+          "label": "Passenger Projects – Projected Annual Total Number of Passengers (2040)",
+          "tooltip": "Please type in your response for projected 2040 annual total number of passengers. Please enter one value for number of passengers be provided. Please do not use ranges."
+        },
+        "GRADE_SEPARATION": {
+          "label": "Grade Separation",
+          "tooltip": "Please select “yes” or “no” to indicate whether the project will include grade separation to alleviate local congestion."
+        },
+        "RAIL_TERMINUS_TYPE": {
+          "label": "Terminus or Connects to Rail Line that has a Terminus at International Border",
+          "tooltip": "Use the dropdown menu to select your response. Select “Has a terminus at Iinternational Bborder” if the project is on a segment of rail line that crosses or has a terminus at the international border. Select “Connects to a rail line with a terminus at the international border” if the project does not terminate at the international border but does connect to a terminus facility. Select “Neither” if neither situation applies."
+        }
+      },
+      "INTERCHANGE": {
+        "PROJECT_PHASE": {
+          "label": "Current Phase of the Project",
+          "tooltip": "The current phase of the project will be reported as “final design,” or “advanced planning/preliminary engineering/environmental,” or “conceptual planning.” *FINAL DESIGN: includes pre-construction activities such as development of plans and specifications, and estimation of quantities leading up to preparation of bid packages. *ADVANCED PLANNING: Advanced planning/preliminary engineering/environmental includes projects that are in the project study report (PSR) phase, conducting preliminary engineering, including geometric design of specific projects, or preparing an environmental document. *CONCEPTUAL PLANNING: includes those projects that are undergoing a corridor or feasibility study.  "
+        },
+        "EXISTING_CONDITION": {
+          "label": "Existing Condition—Number of Lanes (2015)",
+          "tooltip": "Please describe the current number of lanes by ramp."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condition After Project Completion—Future Number of Lanes",
+          "tooltip": "Please describe the projected number of lanes by ramp."
+        },
+        "RAMP": {
+          "label": "Ramp Direction",
+          "tooltip": "Please provide the direction of the ramp."
+        },
+        "NAME_NEAREST_INTERCHANGE": {
+          "label": "If New, Name of Nearest Interchange",
+          "tooltip": "For new interchanges, please report 2015 data for the nearest interchange. Please list the name of the nearest interchange and use data for this facility where necessary."
+        },
+        "ANNUAL_DAILY_TRAFFIC": {
+          "label": "Annual Average Daily Traffic-AADT (2015)",
+          "tooltip": "Please type in your response. Please enter one value for AADT. Please do not use ranges. AADT for 2015 will not be available for new interchanges; therefore, please enter zero “0” for AADT 2015 (Do not use a nearest interchange)."
+        },
+        "FUTURE_ANNUAL_DAILY_TRAFFIC": {
+          "label": "Annual Average Daily Traffic-AADT (2040)",
+          "tooltip": "Please type in your response for projected 2040 AADT. Please enter one value for AADT. Please do not use ranges."
+        },
+        "TRUCK_PERCENT_SHARE_AADT": {
+          "label": "Truck Percent Share of AADT (2015)",
+          "tooltip": "Please provide the truck percent share of AADT on the interchange (no decimals). Truck percent share of AADT for 2015 will not be available for new interchanges; therefore, please use truck percent share for a nearest interchange."
+        },
+        "ACCIDENT_RATE": {
+          "label": "Accident Rate Above or Below Statewide or Citywide Rate for a Similar Facility (2015)",
+          "tooltip": "Please select one response from the dropdown menu. 2015 accident rate will not be available for new interchanges; therefore, please use a nearest interchange to determine if the accident rate is above or below a statewide or citywide rate for a similar facility."
+        }
+      },
+      "ROADWAY": {
+        "PROJECT_PHASE": {
+          "label": "Current Phase of the Project",
+          "tooltip": "The current phase of the project will be reported as “final design,” or “advanced planning/preliminary engineering/environmental,” or “conceptual planning.” *FINAL DESIGN: includes pre-construction activities such as development of plans and specifications, and estimation of quantities leading up to preparation of bid packages. *ADVANCED PLANNING: Advanced planning/preliminary engineering/environmental includes projects that are in the project study report (PSR) phase, conducting preliminary engineering, including geometric design of specific projects, or preparing an environmental document. *CONCEPTUAL PLANNING: includes those projects that are undergoing a corridor or feasibility study. "
+        },
+        "EXISTING_CONDITION": {
+          "label": "Existing Condition",
+          "tooltip": "Please describe the current number of lanes and facility type (e.g. freeway, expressway, arterial, collector)."
+        },
+        "CURRENT_LANES": {
+          "label": "Current Number of Lanes",
+          "tooltip": ""
+        },
+        "CURRENT_FACILITY": {
+          "label": "Current Facility Type",
+          "tooltip": ""
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condition after Project Completion",
+          "tooltip": "Please describe the number of lanes and facility type after the project has been completed."
+        },
+        "FUTURE_LANES": {
+          "label": "Future Number of Lanes",
+          "tooltip": ""
+        },
+        "FUTURE_FACILITY": {
+          "label": "Future Facility Type",
+          "tooltip": ""
+        },
+        "NAME_PARALLEL_FACILITY": {
+          "label": "If New, Name of Parallel Facility",
+          "tooltip": "For new roadways, please report 2015 data for a parallel facility. Please list the parallel facility and use data for this facility where necessary."
+        },
+        "ANNUAL_DAILY_TRAFFIC": {
+          "label": "Annual Average Daily Traffic-AADT (2015)",
+          "tooltip": "Please type in your response. Please enter one value for AADT - no ranges. AADT for 2015 will not be available for new roadways; therefore, please enter zero “0” for AADT 2015."
+        },
+        "FUTURE_ANNUAL_DAILY_TRAFFIC": {
+          "label": "Annual Average Daily Traffic-AADT (2040)",
+          "tooltip": "Please type in your response for projected 2040 AADT. Please enter one value for AADT—no ranges."
+        },
+        "TRUCK_PERCENT_SHARE_AADT": {
+          "label": "Truck Percent Share of AADT (2015)",
+          "tooltip": "Please provide the truck percent share of AADT on the roadway. Truck percent share of AADT for 2015 will not be available for new roadways; therefore, please use truck percent share for a parallel facility."
+        },
+        "ACCIDENT_RATE": {
+          "label": "Accident Rate Above or Below Statewide or Citywide Rate for a Similar Facility (2015)",
+          "tooltip": "Please select one response from the dropdown menu. 2015 accident rate for new roadways will not be available; therefore, please use a parallel facility to determine if the accident rate is above or below a statewide or citywide rate for a similar facility."
+        }
+      },
+      "CROSSBORDER": {
+        "PROJECT_TYPE": {
+          "label": "Project Type",
+          "tooltip": "Please select either 'bicycle' or 'pedestrian' or “other micromobility rideable” such as scooters, mopeds, e-bikes, e-scooters and other rideables."
+        },
+        "PROJECT_PHASE": {
+          "label": "Current Phase of the Project",
+          "tooltip": "The current phase of the project will be reported as “final design,” or “advanced planning/preliminary engineering/environmental,” or “conceptual planning.” *FINAL DESIGN: includes pre-construction activities such as development of plans and specifications, and estimation of quantities leading up to preparation of bid packages. *ADVANCED PLANNING: Advanced planning/preliminary engineering/environmental includes projects that are in the project study report (PSR) phase, conducting preliminary engineering, including geometric design of specific projects, or preparing an environmental document. *CONCEPTUAL PLANNING: includes those projects that are undergoing a corridor or feasibility study."
+        },
+        "EXISTING_CONDITION": {
+          "label": "Existing Condition",
+          "tooltip": "Please describe the existing condition."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condition after Project Completion",
+          "tooltip": "Please describe the condition after project improvement."
+        }
+      },
+      "SHORT_TERM": {
+        "SHORT_TERM_PROJECT_LOCATION": {
+          "label": "Project Location (POE or city)",
+          "tooltip": "Please provide the location of the project (POE or city)"
+        },
+        "HOW_REDUCE_BORDER_WAIT": {
+          "label": "Explanation of How Project Could Reduce Border Wait Times",
+          "tooltip": "Please explain how the project could reduce border wait rimes."
+        },
+        "YEAR_PROJECT_OPERATIONAL": {
+          "label": "Year Project Becomes Operational",
+          "tooltip": "All projects must be planned for completion in the short-term (2020 and 2024)."
+        },
+        "PROJECT_PHASE": {
+          "label": "Current Phase of the Project",
+          "tooltip": "The current phase of the project will be reported as “final design,” or “advanced planning/preliminary engineering/environmental,” or “conceptual planning” or “idea.” *FINAL DESIGN: ncludes pre-construction activities such as development of plans and specifications, and estimation of quantities leading up to preparation of bid packages. *ADVANCED PLANNING: Advanced planning/preliminary engineering/environmental includes projects that are in the project study report (PSR) phase, conducting preliminary engineering, including geometric design of specific projects, or preparing an environmental document. *CONCEPTUAL PLANNING: includes those projects that are undergoing a corridor or feasibility study. *IDEA: includes those projects that are innovative ideas for reducing border wait times, but that are not included in any planning document."
+        },
+        "EXISTING_CONDITION": {
+          "label": "Existing Condition",
+          "tooltip": "Please describe the existing condition."
+        },
+        "CONDITION_PROJECT_COMPLETION": {
+          "label": "Condition after Project Completion",
+          "tooltip": "Please describe the condition after project improvement."
+        },
+        "TOTAL_PROJECT_COST": {
+          "label": "Total Project Cost (2015 $USD--$1.25M or less)",
+          "tooltip": "Please report the total cost of project in 2015 U.S. dollars. Project required to be $1.25 million U.S. dollars or less. Please use currency converter tool, if needed."
+        }
+      }
+    }
+  }
+}
